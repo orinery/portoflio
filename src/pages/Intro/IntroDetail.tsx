@@ -20,7 +20,7 @@ const IntroDetail = () => {
         <div className="card">
           <div className="card__image-wrapper">
             <img
-              src="../../assets/frontend.png"
+              src="/assets/frontend.png"
               alt="프론트엔드 이미지"
               className="card__image"
             />
@@ -37,7 +37,7 @@ const IntroDetail = () => {
         <div className="card">
           <div className="card__image-wrapper">
             <img
-              src="../../assets/accessibility.png"
+              src="/assets/accessibility.png"
               alt="접근성 이미지"
               className="card__image"
             />
@@ -54,7 +54,7 @@ const IntroDetail = () => {
         <div className="card">
           <div className="card__image-wrapper">
             <img
-              src="../../assets/collaboration.png"
+              src="/assets/collaboration.png"
               alt="협업도구 이미지"
               className="card__image"
             />
