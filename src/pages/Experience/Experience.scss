@@ -1,0 +1,271 @@
+@use '../../style/globals';
+
+.experience-section {
+  padding: 6rem 1rem;
+  border-bottom:  1px solid globals.$color-gray-300;
+  margin: 0 auto;
+
+  .section-title{
+    text-align: center;
+    font-size: 1.2rem;
+    color: globals.$color-primary;
+    font-family: globals.$font-pretendard;
+  }
+
+  .section-subTitle{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: globals.$font-pretendard;
+    word-break: keep-all;
+  }
+
+  .experience-title {
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+
+    .line {
+      flex: 1;
+      height: 1px;
+      background-color:  globals.$color-gray-300;
+      max-width: 350px;
+    }
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 2.5rem;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .experience-item {
+    display: flex;
+    gap: 1.5rem;
+
+    .experience-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.25rem;
+      font-size: 1rem;
+      color: #6b7280;
+      line-height: 2rem;
+    }
+
+    .experience-right {
+      flex: 1;
+
+      .title {
+        font-size: 1.5rem;
+      }
+
+      .description {
+        color: #6b7280;
+        white-space: pre-line;
+        font-size: 1rem;
+        margin-top: 0.3rem;
+      }
+
+      .tech-stack {
+        margin: 0.5rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+
+        .tech-badge {
+          background-color: globals.$color-gray-100;
+          padding: 0.15rem 0.6rem;
+          border-radius: 9999px;
+          font-size: 0.85rem;
+        }
+      }
+      
+      .toggle-link {
+        background: none;
+        border: none;
+        color: globals.$color-primary;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0;
+        margin-top: 0.5rem;
+      }
+
+      // 주요 업무 내용------
+
+      .project-title {
+        font-size: 1.2rem;
+        margin-top: 0.8rem;
+        color: globals.$color-primary;
+
+      }
+
+      .task-group {
+        margin-top: 0.8rem;
+        margin-left: 0.5rem;
+        
+        h5{
+          font-size: 1rem;
+          font-weight: 500;
+          color: globals.$color-gray-700;
+        }
+
+        .task-role {
+          font-size: 0.95rem;
+          color: globals.$color-gray-500;
+          margin-top: 0.5rem;
+        }
+
+        .task-list {
+          padding: 0.5rem 1rem 0.5rem 0.65rem;
+          border-radius: 5px;
+          list-style: disc;
+          list-style-position: inside;
+          background-color: globals.$color-gray-100;
+
+          li {
+            font-size: 0.95rem;
+            color: #374151;
+            margin-bottom: 0.2rem;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      
+
+      .task-list {
+        margin-top: 0.8rem;
+        padding: 0.5rem 1rem 0.5rem 1.5rem;
+        border-radius: 5px;
+        list-style: disc;
+        background-color: globals.$color-gray-100;
+
+        li {
+          font-size: 0.95rem;
+          color: #374151;
+          margin-bottom: 0.4rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .mobileVisible {
+    display: none;
+  }
+
+  @media (max-width: globals.$breakpoint-mobile) {
+    .experience-item {
+    gap: 0.9rem;
+  }
+    .mobileVisible {
+      display: block;
+    }
+  }
+}
+
+// ---------------다크 모드---------------
+
+
+.dark .experience-section {
+  border-bottom:  1px solid globals.$color-gray-700;
+
+  .section-title{
+    color: globals.$color-primary-light;
+  }
+
+  .section-subTitle{
+    color: globals.$color-white;
+  }
+
+  .experience-title {
+    color: globals.$color-gray-400;
+    .line {
+      background-color:  globals.$color-gray-700;
+    }
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 2.5rem;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  .experience-item {
+
+    .experience-left {
+      color: globals.$color-gray-400;
+    }
+
+    .experience-right {
+
+      .title {
+        color: globals.$color-white;
+      }
+
+      .description {
+        color: globals.$color-gray-400;
+      }
+
+      .tech-stack {
+        .tech-badge {
+          background-color: globals.$color-gray-500;
+          color: globals.$color-white;
+        }
+      }
+      
+      .toggle-link {
+        color: globals.$color-primary-light;
+      }
+
+      // 주요 업무 내용------
+      .project-title {
+        color: globals.$color-primary;
+      }
+
+      .task-group {
+        h5{
+          color: globals.$color-gray-300;
+        }
+
+        .task-role {
+          color: globals.$color-gray-400;
+        }
+
+        .task-list {
+          background-color: globals.$color-gray-700;
+
+          li {
+            color: globals.$color-gray-300;
+          }
+        }
+      }
+      
+
+      .task-list {
+        background-color: globals.$color-gray-700;
+
+        li {
+          color: globals.$color-gray-300;
+          
+        }
+      }
+    }
+  }
+}

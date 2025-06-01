@@ -1,0 +1,90 @@
+@use '../../style/globals';
+
+.intro-detail {
+  padding: 3rem 1rem 4rem;
+  text-align: center;
+
+  .section-title{
+    font-size: 1.2rem;
+    color: globals.$color-primary;
+    font-family: globals.$font-pretendard;
+  }
+  .section-subTitle{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: globals.$font-pretendard;
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .card {
+    background: #f9fafb;
+    border-radius: 1rem;
+    padding: 1.2rem;
+    width: 280px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    &__image-wrapper{
+      width: 100%;
+      margin-bottom: 0.7rem;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    &__title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    &__text {
+      font-family: globals.$font-noto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color:globals.$color-gray-700;
+    }
+  }
+  .mobileVisible{
+    display: none;
+  }
+}
+@media (max-width: #{globals.$breakpoint-mobile}) {
+  .intro-detail .mobileVisible {
+    display: block !important;
+  }
+}
+// ---------------다크 모드---------------
+.dark .intro-detail {
+
+  .section-title{
+    color: globals.$color-primary-light;
+  }
+  .section-subTitle{
+    color: globals.$color-white;
+    font-family: globals.$font-pretendard;
+  }
+
+  .card {
+    background: globals.$color-gray-700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+
+    &__image-wrapper{
+      filter: brightness(0.85) contrast(1.2) saturate(1.1);
+      opacity: 0.95;
+    }
+
+    &__title {
+      color: globals.$color-white;
+    }
+    &__text {
+      color:globals.$color-gray-300;
+    }
+  }
+}

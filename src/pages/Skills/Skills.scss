@@ -1,0 +1,142 @@
+@use '../../style/globals';
+
+.skill-section {
+  text-align: center;
+  padding: 6rem 2rem;
+
+  .section-title{
+    font-size: 1.2rem;
+    color: globals.$color-primary;
+    font-family: globals.$font-pretendard;
+  }
+  .section-subTitle{
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: globals.$font-pretendard;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: globals.$color-gray-300;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    width: fit-content;
+    margin: 1rem auto 2rem;
+    gap: 0.5rem;
+    flex-shrink: 1;
+
+    button {
+      padding: 0.2rem 0.5rem;
+      background: transparent;
+      border: none;
+      border-radius: 9999px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #6b7280; 
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      white-space: nowrap;
+
+      &.active {
+        background-color: white;
+        color: globals.$color-black;
+      }
+
+      &:hover {
+        color:globals.$color-gray-900;
+      }
+    }
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 1.5rem;
+    justify-content: center;
+    max-width: 500px;
+  }
+
+  .skill-item {
+    width: 80px;
+    height: 80px;
+    background: globals.$color-white;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.3s ease;
+
+    &.blurred {
+      filter: blur(3px) grayscale(60%) brightness(0.9);
+      opacity: 0.4;
+    }
+
+    .icon {
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 5px;
+      object-fit: cover;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .label {
+      font-family: globals.$font-noto;
+      font-size: 0.9rem;
+      color: #333;
+    }
+  }
+
+  @media (max-width: globals.$breakpoint-mobile) {
+    .tabs {
+      button {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+
+// ---------------다크 모드---------------
+.dark .skill-section {
+  background: globals.$color-darkmode;
+
+  .section-title{
+    color: globals.$color-primary-light;
+  }
+  .section-subTitle{
+    color: globals.$color-white;
+  }
+
+  .tabs {
+    background-color: globals.$color-gray-500;
+
+    button {
+      color: globals.$color-gray-300;
+
+      &.active {
+        background-color: globals.$color-gray-100;
+        color: globals.$color-black;
+      }
+
+      &:hover {
+        color:globals.$color-gray-700;
+      }
+    }
+  }
+
+  .skill-item {
+    background: globals.$color-gray-600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .label {
+      color: globals.$color-gray-100;
+    }
+  }
+
+}
