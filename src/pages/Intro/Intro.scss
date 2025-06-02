@@ -26,13 +26,20 @@
       font-size: 1.2rem;
       color: globals.$color-gray-500;
     }
-
-    button {
+    .intro-buttons{
+      display: flex;
+      justify-content: center;
+      width: fit-content;
+      gap: 1rem;
+      margin: 0 auto;
+    }
+    button, .button {
       display: block;
       width: fit-content;
       margin: 0 auto;
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      min-height: 44px;
+      padding: 0.75rem 1.25rem;
       border: none;
       border-radius: 5px;
       background-color:globals.$color-gray-300;
@@ -89,9 +96,9 @@
       color: globals.$color-gray-300;
     }
 
-    button {
+    button, .button {
       background-color:globals.$color-gray-600;
-      color: globals.$color-gray-100;
+      color: globals.$color-white;
       &:hover {
         background-color:globals.$color-gray-500;
         color: globals.$color-gray-900;

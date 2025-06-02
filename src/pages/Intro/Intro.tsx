@@ -1,6 +1,10 @@
+import { useState } from "react";
 import "./Intro.scss";
+import FeedbackModal from "./Feedback/FeedbackModal";
 
 const Intro = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="intro-section" id="intro">
       <div className="intro-content">
@@ -17,13 +21,18 @@ const Intro = () => {
           <br className="mobileVisible" />
           함께 성장하고 소통할 수 있는 팀에서 일하길 기대하고 있습니다.
         </p>
-        <a
-          href="https://www.notion.so/Guchaehyun-1a607f340efa80d4b4d9f6f5229f72da?source=copy_link"
-          target="_blank"
-        >
-          <button>이력서 보기</button>
-        </a>
+        <div className="intro-buttons">
+          <a
+            href="https://www.notion.so/Guchaehyun-1a607f340efa80d4b4d9f6f5229f72da?source=copy_link"
+            target="_blank"
+            className="button"
+          >
+            이력서 보기
+          </a>
+          <button onClick={() => setIsModalOpen(true)}>동료 피드백</button>
+        </div>
       </div>
+      {isModalOpen && <FeedbackModal onClose={() => setIsModalOpen(false)} />}
     </section>
   );
 };

@@ -1,0 +1,112 @@
+@use '../../../style/globals';
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-height: 80vh;
+  width: 90%;
+  max-width: 700px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: globals.$color-gray-700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: globals.$color-primary;
+  font-family: globals.$font-pretendard;
+}
+
+.feedback-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feedback-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid globals.$color-gray-300;
+  word-break: keep-all;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .feedback-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .feedback-meta {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: right;
+    color: globals.$color-gray-700;
+
+    .feedback-role {
+      font-weight: 500;
+      margin-left: 0.5rem;
+      color: globals.$color-gray-400;
+    }
+  }
+}
+// ---------------다크 모드---------------
+
+.dark .modal-content {
+  background:globals.$color-gray-800;
+}
+
+.dark .close-button {
+  color: globals.$color-gray-300;
+}
+
+.dark h2 {
+
+  color: globals.$color-primary-light;
+} 
+
+
+.dark .feedback-item {
+  border-bottom: 1px solid globals.$color-gray-600;
+
+    &:last-child {
+    border-bottom: none;
+  }
+    .feedback-content {
+      color: globals.$color-gray-100;
+    }
+  .feedback-meta {
+    color: globals.$color-gray-300;
+
+    .feedback-role {
+      font-weight: 500;
+      margin-left: 0.5rem;
+      color: globals.$color-gray-400;
+    }
+  }
+}
+
