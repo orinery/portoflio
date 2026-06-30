@@ -51,7 +51,12 @@ export default function SkillSection() {
                 : ""
             }`}
           >
-            <img src={skill.icon} alt={skill.name} className="icon" />
+            <img
+              src={skill.icon}
+              alt={skill.name}
+              data-name={skill.name}
+              className="icon"
+            />
             <span className="label">{skill.name}</span>
           </div>
         ))}

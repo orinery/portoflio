@@ -137,6 +137,13 @@
     .label {
       color: globals.$color-gray-100;
     }
+
+    // 단색(검정) 아이콘은 다크모드 타일 배경에서 안 보이므로 반전
+    .icon[data-name="GitHub"],
+    .icon[data-name="Vercel"],
+    .icon[data-name="Notion"] {
+      filter: invert(1);
+    }
   }
 
 }
