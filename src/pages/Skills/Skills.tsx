@@ -4,7 +4,7 @@ import { skills } from "./SkillData";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const categories = ["프론트엔드", "환경 및 배포", "디자인 및 협업"];
+const categories = ["프론트엔드", "환경 및 배포", "디자인 및 협업", "AI 활용"];
 
 export default function SkillSection() {
   const [selected, setSelected] = useState("전체");

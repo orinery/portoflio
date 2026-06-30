@@ -22,6 +22,7 @@ export const projectsData: Project[] = [
     description: "Next.js와 TypeScript로 제작한 급여 계산 서비스입니다. 연봉만 입력하면 4대보험과 소득세를 자동으로 공제해 월 실수령액을 계산하며, 시급·주휴수당, 퇴직금, 연말정산 등 직장인에게 필요한 다양한 계산기를 2026년 기준으로 제공합니다.",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "lucide-react", "Vercel"],
     img: "/assets/wolgup.png",
+    githubUrl: "https://github.com/orinery/wolgup-jeongseok",
     demoUrl: "https://www.realwolgup.com/",
   },
   {

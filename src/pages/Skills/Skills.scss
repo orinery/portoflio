@@ -141,7 +141,14 @@
     // 단색(검정) 아이콘은 다크모드 타일 배경에서 안 보이므로 반전
     .icon[data-name="GitHub"],
     .icon[data-name="Vercel"],
-    .icon[data-name="Notion"] {
+    .icon[data-name="Notion"],
+    .icon[data-name="Next.js"],
+    .icon[data-name="Slack"],
+    .icon[data-name="Claude"],
+    .icon[data-name="Claude Code"],
+    .icon[data-name="ChatGPT"],
+    .icon[data-name="Cursor"],
+    .icon[data-name="Gemini"] {
       filter: invert(1);
     }
   }

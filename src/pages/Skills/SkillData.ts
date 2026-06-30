@@ -16,6 +16,11 @@ export const skills: Skill[] = [
     icon: "/assets/icons/react.svg",
   },
   {
+    name: "Next.js",
+    category: "프론트엔드",
+    icon: "/assets/icons/nextdotjs.svg",
+  },
+  {
     name: "TypeScript",
     category: "프론트엔드",
     icon: "/assets/icons/typescript.svg",
@@ -74,5 +79,40 @@ export const skills: Skill[] = [
     name: "Notion",
     category: "디자인 및 협업",
     icon: "/assets/icons/notion.svg",
+  },
+  {
+    name: "Slack",
+    category: "디자인 및 협업",
+    icon: "/assets/icons/slack.svg",
+  },
+  {
+    name: "Claude",
+    category: "AI 활용",
+    icon: "/assets/icons/claude.svg",
+  },
+  {
+    name: "Claude Code",
+    category: "AI 활용",
+    icon: "/assets/icons/claude-code.svg",
+  },
+  {
+    name: "ChatGPT",
+    category: "AI 활용",
+    icon: "/assets/icons/chatgpt.svg",
+  },
+  {
+    name: "Cursor",
+    category: "AI 활용",
+    icon: "/assets/icons/cursor.svg",
+  },
+  {
+    name: "Gemini",
+    category: "AI 활용",
+    icon: "/assets/icons/gemini.svg",
+  },
+  {
+    name: "Midjourney",
+    category: "AI 활용",
+    icon: "/assets/icons/midjourney.png",
   },
 ];
