@@ -25,13 +25,11 @@ const IntroDetail = () => {
               className="card__image"
             />
           </div>
-          <h3 className="card__title">모던 프론트엔드 개발</h3>
+          <h3 className="card__title">디자인을 이해하는 프론트엔드 개발</h3>
           <p className="card__text">
-            React와 TypeScript 기반으로 프로젝트를 구성하고, Firebase를 활용한
-            인증과 데이터 연동을 구현해보았습니다.
+            React·TypeScript·Next.js로 서비스를 구성하고, Firebase 인증·데이터 연동, 공공 API 연동까지 직접 구현합니다.
             <br />
-            바닐라 JavaScript를 활용한 인터랙션 구현 및 간단한 게임 개발 경험도
-            있습니다.
+            Photoshop·Illustrator·Figma를 다뤄온 디자인 경험 덕분에, 디자인 시안을 픽셀 단위로 충실히 옮기면서도 구현 가능성을 함께 판단합니다.
           </p>
         </div>
         <div className="card">
@@ -42,12 +40,9 @@ const IntroDetail = () => {
               className="card__image"
             />
           </div>
-          <h3 className="card__title">웹 접근성을 고려한 UI/UX</h3>
+          <h3 className="card__title">웹 표준·접근성 기반 UI 구현</h3>
           <p className="card__text">
-            시각장애인용 콘텐츠와 디지털 교과서 개발 경험을 통해, 정보 구조와
-            시각 흐름의 중요성을 실무에서 배웠습니다.
-            <br />웹 표준과 접근성 지침을 적용한 UI 구현에 꾸준히 관심을 갖고
-            있습니다.
+          시각장애인용 교과서 리더기와 디지털 교과서를 개발하며, 정보 구조와 시각 흐름을 실제 사용자 제약 속에서 설계했습니다. 시맨틱 마크업과 웹 접근성 지침(WCAG)을 적용해, 모든 사용자가 동등하게 접근하는 화면을 만듭니다.
           </p>
         </div>
 
@@ -59,12 +54,13 @@ const IntroDetail = () => {
               className="card__image"
             />
           </div>
-          <h3 className="card__title">커뮤니케이션 및 협업</h3>
+          <h3 className="card__title">직군을 넘나드는 협업</h3>
           <p className="card__text">
-            GitHub, SVN, Notion 등의 협업 도구 사용 경험이 있습니다.
+            디자이너·고객사·외주 인력과 협업하며
+            <br/>
+            Slack, GitHub, SVN, Notion으로 일정과 산출물을 관리했습니다.
             <br />
-            디자이너, 고객사, 외주 인력 등 다양한 직군과의 협업을 통해 유연하게
-            소통하는 방식을 익혔습니다.
+            외주 온보딩 가이드를 직접 만들고 반복 작업을 제거하는 프로세스를 제안해, 팀의 야근을 절반으로 줄였습니다.
           </p>
         </div>
       </div>
