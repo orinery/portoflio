@@ -43,6 +43,8 @@
       letter-spacing: 0.16em;
       color: globals.$color-primary;
       margin-bottom: 26px;
+
+      .kicker-short { display: none; }
     }
 
     h1 {
@@ -193,6 +195,11 @@
     .intro-content {
       h1 { font-size: 40px; }
       p { font-size: 15px; }
+
+      .kicker {
+        .kicker-full  { display: none; }
+        .kicker-short { display: inline; }
+      }
     }
   }
 }

@@ -8,7 +8,10 @@ const Intro = () => {
         <div className="dot-grid" aria-hidden="true" />
 
         <div className="intro-content">
-          <div className="kicker">FRONTEND DEVELOPER · DESIGN BACKGROUND</div>
+          <div className="kicker">
+            <span className="kicker-full">FRONTEND DEVELOPER · DESIGN BACKGROUND</span>
+            <span className="kicker-short">FRONTEND · DESIGN</span>
+          </div>
           <h1>
             디자인하고,
             <br />
