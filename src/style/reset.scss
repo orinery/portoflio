@@ -7,16 +7,21 @@ body,h1, h2, h3, h4, h5, h6,p, figure, blockquote, dl, dd {margin: 0;}
 ul[role='list'],
 ol[role='list'] {list-style: none;}
 
+html { scroll-behavior: smooth; }
+
 body {
   min-height: 100vh;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  // background-color: #F3F4F6;
-  color: #1A1A1A;
+  background-color: #F7F8FA;
+  color: #15171C;
+  overflow-x: clip;
 }
-body.dark{
-  background-color: #191919;
+
+body.dark {
+  background-color: #0D0E11;
+  color: #EAECEF;
 }
 
 img,picture,video,canvas,svg {display: block;max-width: 100%;height: auto;}

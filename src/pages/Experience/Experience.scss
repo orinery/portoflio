@@ -1,271 +1,222 @@
 @use '../../style/globals';
 
 .experience-section {
-  padding: 6rem 1rem;
-  border-bottom:  1px solid globals.$color-gray-300;
-  margin: 0 auto;
-
-  .section-title{
-    text-align: center;
-    font-size: 1.2rem;
-    color: globals.$color-primary;
-    font-family: globals.$font-pretendard;
+  .section-inner {
+    @include globals.container;
   }
 
-  .section-subTitle{
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    font-family: globals.$font-pretendard;
-    word-break: keep-all;
+  .exp-row {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+
+    &:last-child { margin-bottom: 0; }
   }
 
-  .experience-title {
-    text-align: center;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
+  .exp-meta {
+    .exp-period {
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      color: globals.$color-primary;
+      margin-bottom: 10px;
+    }
 
-    .line {
-      flex: 1;
-      height: 1px;
-      background-color:  globals.$color-gray-300;
-      max-width: 350px;
+    .exp-company {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 4px;
+    }
+
+    .exp-role {
+      font-size: 15px;
+      color: #5A606A;
+      margin-bottom: 16px;
+    }
+
+    .exp-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: globals.$muted-2;
+      margin: 0 0 16px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
   }
 
-  .experience-list {
+  .exp-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+
+    .metric-card {
+      background: globals.$surface;
+      border: 1px solid globals.$border;
+      border-radius: 12px;
+      padding: 20px;
+
+      .metric-value {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: globals.$color-primary;
+
+        .arrow { font-size: 16px; }
+      }
+
+      .metric-label {
+        font-size: 12.5px;
+        color: globals.$muted;
+        margin-top: 6px;
+      }
+    }
+  }
+
+  .exp-accordion {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    gap: 2.5rem;
-    max-width: 800px;
-    width: 100%;
-  }
 
-  .experience-item {
-    display: flex;
-    gap: 1.5rem;
-
-    .experience-left {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.25rem;
-      font-size: 1rem;
-      color: #6b7280;
-      line-height: 2rem;
+    .acc-item {
+      border-top: 1px solid #EDEEF2;
     }
 
-    .experience-right {
-      flex: 1;
+    .acc-head {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
 
-      .title {
-        font-size: 1.5rem;
-      }
-
-      .description {
-        color: #6b7280;
-        white-space: pre-line;
-        font-size: 1rem;
-        margin-top: 0.3rem;
-      }
-
-      .tech-stack {
-        margin: 0.5rem 0;
+      .acc-title {
         display: flex;
+        align-items: baseline;
+        gap: 12px;
         flex-wrap: wrap;
-        gap: 0.4rem;
 
-        .tech-badge {
-          background-color: globals.$color-gray-100;
-          padding: 0.15rem 0.6rem;
-          border-radius: 9999px;
-          font-size: 0.85rem;
+        .acc-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: globals.$ink;
+        }
+
+        .acc-period {
+          font-family: globals.$font-mono;
+          font-size: 11px;
+          color: globals.$muted-3;
         }
       }
-      
-      .toggle-link {
-        background: none;
-        border: none;
+
+      .acc-sign {
+        flex: none;
+        font-family: globals.$font-mono;
+        font-size: 20px;
+        line-height: 1;
         color: globals.$color-primary;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0;
-        margin-top: 0.5rem;
+        width: 20px;
+        text-align: center;
+      }
+    }
+
+    .acc-body {
+      padding: 0 0 22px;
+
+      .acc-role {
+        font-size: 13px;
+        color: globals.$muted-2;
+        margin-bottom: 12px;
       }
 
-      // 주요 업무 내용------
-
-      .project-title {
-        font-size: 1.2rem;
-        margin-top: 0.8rem;
-        color: globals.$color-primary;
-
-      }
-
-      .task-group {
-        margin-top: 0.8rem;
-        margin-left: 0.5rem;
-        
-        h5{
-          font-size: 1rem;
-          font-weight: 500;
-          color: globals.$color-gray-700;
-        }
-
-        .task-role {
-          font-size: 0.95rem;
-          color: globals.$color-gray-500;
-          margin-top: 0.5rem;
-        }
-
-        .task-list {
-          padding: 0.5rem 1rem 0.5rem 0.65rem;
-          border-radius: 5px;
-          list-style: disc;
-          list-style-position: inside;
-          background-color: globals.$color-gray-100;
-
-          li {
-            font-size: 0.95rem;
-            color: #374151;
-            margin-bottom: 0.2rem;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
-        }
-      }
-      
-
-      .task-list {
-        margin-top: 0.8rem;
-        padding: 0.5rem 1rem 0.5rem 1.5rem;
-        border-radius: 5px;
-        list-style: disc;
-        background-color: globals.$color-gray-100;
+      ul {
+        margin: 0;
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
 
         li {
-          font-size: 0.95rem;
-          color: #374151;
-          margin-bottom: 0.4rem;
-          
-          &:last-child {
-            margin-bottom: 0;
-          }
+          font-size: 14px;
+          line-height: 1.6;
+          color: #5A606A;
         }
       }
     }
   }
 
-  .mobileVisible {
-    display: none;
+  .exp-tasks {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    li {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #5A606A;
+    }
   }
 
-  @media (max-width: globals.$breakpoint-mobile) {
-    .experience-item {
-    gap: 0.9rem;
+  @media (max-width: 768px) {
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
-    .mobileVisible {
-      display: block;
+
+  // 모바일: 지표 카드는 3열 유지하되 압축 (시안 모바일)
+  @media (max-width: 640px) {
+    .exp-metrics {
+      gap: 8px;
+
+      .metric-card {
+        padding: 14px 12px;
+
+        .metric-value { font-size: 22px; }
+        .metric-label { font-size: 11px; line-height: 1.3; }
+      }
     }
   }
 }
 
-// ---------------다크 모드---------------
-
-
+// ===== 다크 모드 =====
 .dark .experience-section {
-  border-bottom:  1px solid globals.$color-gray-700;
-
-  .section-title{
-    color: globals.$color-primary-light;
+  .exp-meta {
+    .exp-role { color: globals.$d-muted; }
+    .exp-desc { color: globals.$d-muted-2; }
   }
 
-  .section-subTitle{
-    color: globals.$color-white;
+  .exp-metrics .metric-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+
+    .metric-label { color: globals.$d-muted; }
   }
 
-  .experience-title {
-    color: globals.$color-gray-400;
-    .line {
-      background-color:  globals.$color-gray-700;
+  .exp-accordion {
+    .acc-item { border-top-color: globals.$d-border-soft; }
+
+    .acc-head .acc-title {
+      .acc-name { color: globals.$d-ink; }
+      .acc-period { color: globals.$d-muted-3; }
+    }
+
+    .acc-body {
+      .acc-role { color: globals.$d-muted-2; }
+      ul li { color: globals.$d-muted; }
     }
   }
 
-  .experience-list {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    gap: 2.5rem;
-    max-width: 700px;
-    width: 100%;
-  }
-
-  .experience-item {
-
-    .experience-left {
-      color: globals.$color-gray-400;
-    }
-
-    .experience-right {
-
-      .title {
-        color: globals.$color-white;
-      }
-
-      .description {
-        color: globals.$color-gray-400;
-      }
-
-      .tech-stack {
-        .tech-badge {
-          background-color: globals.$color-gray-500;
-          color: globals.$color-white;
-        }
-      }
-      
-      .toggle-link {
-        color: globals.$color-primary-light;
-      }
-
-      // 주요 업무 내용------
-      .project-title {
-        color: globals.$color-primary;
-      }
-
-      .task-group {
-        h5{
-          color: globals.$color-gray-300;
-        }
-
-        .task-role {
-          color: globals.$color-gray-400;
-        }
-
-        .task-list {
-          background-color: globals.$color-gray-700;
-
-          li {
-            color: globals.$color-gray-300;
-          }
-        }
-      }
-      
-
-      .task-list {
-        background-color: globals.$color-gray-700;
-
-        li {
-          color: globals.$color-gray-300;
-          
-        }
-      }
-    }
-  }
+  .exp-tasks li { color: globals.$d-muted; }
 }

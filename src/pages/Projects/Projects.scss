@@ -1,243 +1,361 @@
 @use '../../style/globals';
 
-.projects_section {
-  padding: 6rem 1rem;
-
-  .section-title{
-    text-align: center;
-    font-size: 1.2rem;
-    color: globals.$color-primary;
+.projects-section {
+  .section-inner {
+    @include globals.container;
   }
 
-  .section-subTitle{
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    word-break: keep-all;
+  // 공통 태그 칩 변형 (배경 없는 버전)
+  .tag-chip.plain {
+    background: transparent;
+
+    &.sm {
+      font-size: 10.5px;
+      color: globals.$muted;
+      padding: 3px 7px;
+      border-radius: 5px;
+    }
   }
 
-  .projects__cards {
-    width: 82%;
-    margin: 0 auto;
+  // ===== Featured =====
+  .featured-card {
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    margin-bottom: 24px;
+  }
+
+  .featured-info {
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    margin-top: 3rem;
-  }
-  
-  .projectCard {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2.5rem;
-    background-color: globals.$color-gray-100;
-    border-radius: 1.5rem;
-    padding: 1rem 1rem 1rem 1.5rem;
-    color: globals.$color-black;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.08);
-  
-    .card__info {
-      flex: 1.2;
-      display: flex;
-      flex-direction: column;
-  
-      .card__title {
-        font-size: 1.8rem;
-        padding-left: 0.5rem;
-      }
-  
-      .card__date {
-        font-size: 1rem;
-        color: globals.$color-gray-500;
-        padding-left: 0.5rem;
-      }
-  
-      .card__detail {
-        margin-top: 0.2rem;
-        background-color: globals.$color-gray-300;
-        padding: 1rem;
-        border-radius: 0.8rem;
-        font-size: 1rem;
-        line-height: 1.6;
-        color: globals.$color-gray-700;
-        word-break: keep-all;
-      }
-  
-      .card__techStack {
-        padding-left: 0.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-top: 0.5rem;
-        font-size: 0.85rem;
-        color: globals.$color-gray-500;
-      }
-  
-      .link-wrapper {
-        margin-top: 0.5rem;
-        padding-left: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-  
-        &__link {
-          display: flex;
-          align-items: center;
-          gap: 0.3rem;
-          padding: 0.2rem 0.7rem;
-          background-color: globals.$color-gray-500;
-          color: globals.$color-white;
-          border-radius: 999px;
-          font-size: 0.8rem;
-          text-decoration: none;
-          transition: background 0.3s;
-  
-          &:hover {
-            background-color: globals.$color-gray-700;
-          }
-        }
-      }
-    }
-  
-    .card__image-wrapper {
-      flex-shrink: 0;
+
+    .featured-tags-top {
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-radius: 1.2rem;
+      gap: 10px;
+      margin-bottom: 22px;
+
+      .badge-featured {
+        font-family: globals.$font-mono;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: #fff;
+        background: globals.$color-primary;
+        border-radius: 6px;
+        padding: 4px 9px;
+      }
+
+      .featured-type {
+        font-family: globals.$font-mono;
+        font-size: 12px;
+        color: globals.$muted-3;
+      }
+    }
+
+    .featured-title {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 0 0 8px;
+    }
+
+    .featured-date {
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      color: globals.$muted-3;
+      margin-bottom: 20px;
+    }
+
+    .featured-desc {
+      font-size: 15px;
+      line-height: 1.72;
+      color: globals.$ink-2;
+      margin: 0 0 24px;
+    }
+
+    .featured-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .featured-links {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px 16px;
+        border-radius: 9px;
+        transition: opacity 0.2s, background-color 0.2s;
+      }
+
+      .btn-dark {
+        color: #fff;
+        background: globals.$ink;
+        .ext { font-family: globals.$font-mono; }
+        &:hover { opacity: 0.88; }
+      }
+
+      .btn-outline {
+        color: globals.$ink;
+        background: globals.$surface;
+        border: 1px solid globals.$border;
+        &:hover { border-color: globals.$muted-3; }
+      }
+    }
+  }
+
+  .featured-preview {
+    background: #EEF1F5;
+    padding: 32px 32px 0;
+    display: flex;
+    align-items: flex-end;
+
+    .browser {
+      border: 1px solid #E1E4EA;
+      border-radius: 12px 12px 0 0;
       overflow: hidden;
-      width: 250px;
-      height: 250px;
-  
+      box-shadow: 0 -8px 30px rgba(20, 23, 28, 0.10);
+      width: 100%;
+
+      .browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 12px;
+        background: globals.$bg;
+        border-bottom: 1px solid globals.$border;
+
+        .dot {
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+
+          &.red { background: #E1594E; }
+          &.yellow { background: #E9B44C; }
+          &.green { background: #5BB574; }
+        }
+
+        .browser-url {
+          font-family: globals.$font-mono;
+          font-size: 10px;
+          color: globals.$muted-3;
+          margin-left: 8px;
+        }
+      }
+
       img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  // ===== Grid =====
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 16px;
+    overflow: hidden;
+
+    .project-thumb {
+      border-bottom: 1px solid #EDEEF2;
+      background: #F1F3F6;
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: top;
+      }
+    }
+
+    .project-body {
+      padding: 24px;
+    }
+
+    .project-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      h3 {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .project-meta {
+        font-family: globals.$font-mono;
+        font-size: 11px;
+        color: globals.$muted-3;
+        white-space: nowrap;
+      }
+    }
+
+    .project-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #5A606A;
+      margin: 0 0 16px;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 16px;
+
+      a {
+        font-size: 12.5px;
+        font-weight: 600;
+        text-decoration: none;
+        padding-bottom: 1px;
+      }
+
+      .link-demo {
+        color: globals.$ink;
+        border-bottom: 1px solid globals.$color-primary;
+      }
+
+      .link-github {
+        color: globals.$muted-2;
+        border-bottom: 1px solid #D6DAE1;
+      }
+    }
+
+    .project-private {
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      color: #B0B5BD;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .featured-card {
+      grid-template-columns: 1fr;
+    }
+
+    // 시안 모바일: 브라우저 프리뷰를 정보 위로
+    .featured-preview {
+      order: -1;
+      padding: 24px 24px 0;
+    }
+
+    .featured-info {
+      padding: 28px;
+
+      // CTA 버튼 풀폭 터치 타깃
+      .featured-links a {
+        flex: 1;
+        justify-content: center;
       }
     }
   }
 
-  @media (max-width: globals.$breakpoint-laptop) {
-
-
-    .projectCard {
-      gap: 1.5rem;
-      .card__image-wrapper {
-      width: 200px;
-      height: 200px;
-      }
-    }
-  }
-
-  @media (max-width: globals.$breakpoint-tablet) {
-
-    .projectCard {
-        padding: 0rem;
-        overflow: hidden;
-
-        .card__info {
-        position: relative;
-        z-index: 1;
-        padding: 1rem 0.8rem;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.3);
-
-        .card__date {
-          color: globals.$color-gray-300;
-        }
-        .card__techStack {
-          color: globals.$color-gray-300;
-        }
-      }
-      .card__image-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          filter: brightness(0.4); 
-        }
-      }
-    }
-  }
-}
-
-
-// ---------------다크 모드---------------
-.dark .projects_section {
-
-  .section-title{
-    color: globals.$color-primary-light;
-  }
-
-  .section-subTitle{
-    color: globals.$color-white;
-  }
-  
-  .projectCard {
-    background-color: globals.$color-gray-800;
-    color: #f0f4f8;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.08);
-  
-    // @media (max-width: 768px) {
-    //   flex-direction: column;
-    //   padding: 1.5rem;
-    // }
-  
-    .card__info {
-  
-      .card__date {
-        color: globals.$color-gray-400;
-      }
-  
-      .card__detail {
-        background-color: globals.$color-gray-900;
-        color: #e5eaf2;
-      }
-  
-      .card__techStack {
-        color:  globals.$color-gray-400;
-  
-      }
-  
-      .link-wrapper {
-        &__link {
-          background-color: globals.$color-gray-500;
-          color: globals.$color-white;
-  
-          &:hover {
-          background-color: globals.$color-gray-700;
-          }
-        }
-      }
-    }
-  
-    .card__image-wrapper {
-      filter: brightness(0.85) contrast(1.2) saturate(1.1);
-      // opacity: 0.95;
-      img {
-        filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.3));
-      
+  @media (max-width: 640px) {
+    .project-grid {
+      grid-template-columns: 1fr;
     }
   }
 }
 
-  @media (max-width: globals.$breakpoint-tablet) {
-    .projectCard {
-        .card__info {
-        background-color: rgba(0, 0, 0, 0.08);
+// ===== 다크 모드 =====
+.dark .projects-section {
+  .tag-chip.plain {
+    background: transparent;
+    &.sm { color: globals.$d-muted; }
+  }
+
+  // Featured
+  .featured-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+  }
+
+  .featured-info {
+    .featured-type { color: globals.$d-muted-3; }
+    .featured-date { color: globals.$d-muted-3; }
+    .featured-desc { color: globals.$d-ink-2; }
+
+    .featured-links {
+      // 다크 시안: Live Demo 는 accent 채움
+      .btn-dark {
+        background: globals.$color-primary;
+        &:hover { opacity: 0.88; }
       }
-      .card__image-wrapper {
-        img {
-          filter: brightness(0.4); 
-        }
+
+      .btn-outline {
+        color: globals.$d-ink;
+        background: globals.$d-surface;
+        border-color: globals.$d-border;
+        &:hover { border-color: globals.$d-muted-3; }
       }
     }
+  }
+
+  .featured-preview {
+    background: globals.$d-surface-2;
+
+    .browser {
+      border-color: globals.$d-preview-border;
+
+      .browser-bar {
+        background: globals.$d-bg;
+        border-bottom-color: globals.$d-border;
+
+        .browser-url { color: globals.$d-muted-3; }
+      }
+    }
+  }
+
+  // Grid
+  .project-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+
+    .project-thumb {
+      background: globals.$d-surface-2;
+      border-bottom-color: globals.$d-border-soft;
+    }
+
+    .project-head .project-meta { color: globals.$d-muted-3; }
+    .project-desc { color: globals.$d-muted; }
+
+    .project-links {
+      .link-demo { color: globals.$d-ink; }
+      .link-github { color: globals.$d-muted-2; }
+    }
+
+    .project-private { color: globals.$d-private; }
   }
 }

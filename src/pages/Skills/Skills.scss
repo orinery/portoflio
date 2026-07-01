@@ -1,156 +1,106 @@
 @use '../../style/globals';
 
 .skill-section {
-  text-align: center;
-  padding: 6rem 2rem;
-
-  .section-title{
-    font-size: 1.2rem;
-    color: globals.$color-primary;
-    font-family: globals.$font-pretendard;
-  }
-  .section-subTitle{
-    font-size: 1.5rem;
-    font-weight: 500;
-    font-family: globals.$font-pretendard;
-  }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: globals.$color-gray-300;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    width: fit-content;
-    margin: 1rem auto 2rem;
-    gap: 0.5rem;
-    flex-shrink: 1;
-
-    button {
-      padding: 0.2rem 0.5rem;
-      background: transparent;
-      border: none;
-      border-radius: 9999px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: #6b7280; 
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      white-space: nowrap;
-
-      &.active {
-        background-color: white;
-        color: globals.$color-black;
-      }
-
-      &:hover {
-        color:globals.$color-gray-900;
-      }
-    }
+  .section-inner {
+    @include globals.container;
   }
 
   .skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    gap: 1.5rem;
-    justify-content: center;
-    max-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 
-  .skill-item {
-    width: 80px;
-    height: 80px;
-    background: globals.$color-white;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: filter 0.3s ease;
+  .skill-card {
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 14px;
+    padding: 22px;
 
-    &.blurred {
-      filter: blur(3px) grayscale(60%) brightness(0.9);
-      opacity: 0.4;
-    }
+    &__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
 
-    .icon {
-      width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 5px;
-      object-fit: cover;
-      margin-top: 0.5em;
-      margin-bottom: 0.5em;
-    }
-
-    .label {
-      font-family: globals.$font-noto;
-      font-size: 0.9rem;
-      color: #333;
-    }
-  }
-
-  @media (max-width: globals.$breakpoint-mobile) {
-    .tabs {
-      button {
-        font-size: 0.7rem;
+      .cat-label {
+        font-family: globals.$font-mono;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: globals.$color-primary;
       }
+
+      .cat-count {
+        font-family: globals.$font-mono;
+        font-size: 11px;
+        color: #C2C6CE;
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .icon {
+        width: 18px;
+        height: 18px;
+        object-fit: contain;
+      }
+
+      .label {
+        font-size: 14px;
+        color: #3C4149;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    // 카드 내부 아이콘 리스트를 2열로 (시안 모바일)
+    .skill-card__list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
     }
   }
 }
 
-
-// ---------------다크 모드---------------
+// ===== 다크 모드 =====
 .dark .skill-section {
-  background: globals.$color-darkmode;
+  .skill-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
 
-  .section-title{
-    color: globals.$color-primary-light;
-  }
-  .section-subTitle{
-    color: globals.$color-white;
-  }
+    &__head .cat-count { color: globals.$d-skill-count; }
 
-  .tabs {
-    background-color: globals.$color-gray-500;
+    .skill-item .label { color: globals.$d-skill-label; }
 
-    button {
-      color: globals.$color-gray-300;
-
-      &.active {
-        background-color: globals.$color-gray-100;
-        color: globals.$color-black;
-      }
-
-      &:hover {
-        color:globals.$color-gray-700;
-      }
-    }
-  }
-
-  .skill-item {
-    background: globals.$color-gray-600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    .label {
-      color: globals.$color-gray-100;
-    }
-
-    // 단색(검정) 아이콘은 다크모드 타일 배경에서 안 보이므로 반전
-    .icon[data-name="GitHub"],
-    .icon[data-name="Vercel"],
-    .icon[data-name="Notion"],
+    // 어두운 배경에서 잘 안 보이는 단색 아이콘만 반전
     .icon[data-name="Next.js"],
-    .icon[data-name="Slack"],
-    .icon[data-name="Claude"],
-    .icon[data-name="Claude Code"],
-    .icon[data-name="ChatGPT"],
+    .icon[data-name="Vercel"],
+    .icon[data-name="GitHub"],
+    .icon[data-name="Notion"],
     .icon[data-name="Cursor"],
-    .icon[data-name="Gemini"] {
+    .icon[data-name="ChatGPT"] {
       filter: invert(1);
     }
   }
-
 }

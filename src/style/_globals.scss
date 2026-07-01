@@ -1,10 +1,49 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-// Primary Color
-$color-primary: #2C7BE5;  
-$color-primary-dark: #215CAC;
-$color-primary-light: #3EACFF;
+// Primary Color (accent) — 인디고
+$color-primary: #4F46E5;
+$color-primary-dark: #4338CA;
+$color-primary-light: #6366F1;
+
+// ===== 리디자인 뉴트럴 토큰 (Claude Design 시안) =====
+$bg: #F7F8FA;          // 페이지 배경
+$surface: #ffffff;     // 카드/표면
+$border: #E7E9EE;      // 기본 보더
+$border-soft: #F0F1F4; // 옅은 구분선
+$ink: #15171C;         // 본문 강조 텍스트
+$ink-2: #4B5058;       // 본문 텍스트
+$muted: #6B7280;       // 보조 텍스트
+$muted-2: #868C96;     // 더 옅은 보조
+$muted-3: #9AA0AA;     // 라벨/캡션
+
+// ===== 다크 모드 토큰 (Claude Design 다크 시안) =====
+$d-bg: #0D0E11;         // 페이지 배경
+$d-surface: #15171B;    // 카드/표면
+$d-surface-2: #191B20;  // 프리뷰/썸네일 배경
+$d-border: #23262C;     // 기본 보더
+$d-border-soft: #20232A;// 옅은 구분선
+$d-ink: #EAECEF;        // 강조 텍스트
+$d-ink-2: #AEB3BC;      // 본문 텍스트
+$d-muted: #9BA1AB;      // 보조
+$d-muted-2: #8A8F99;    // 더 옅은 보조
+$d-muted-3: #7E838D;    // 라벨/캡션
+$d-skill-count: #4A4F58;// 스킬 개수 배지
+$d-skill-label: #C3C7CE;// 스킬 라벨 텍스트
+$d-preview-border: #2A2E36; // 프리뷰 브라우저 보더
+$d-private: #5C616B;    // 비공개 캡션
+
+// 공통 섹션 컨테이너
+@mixin container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+}
 
 // Greyscale
 $color-darkmode:#191919;
@@ -27,6 +66,7 @@ $color-error: #EF4444;
 // Font Families
 $font-pretendard: 'Pretendard', sans-serif;
 $font-noto:'Noto Sans KR', sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
 
 // Font Weight
 $font-weight-regular: 400;

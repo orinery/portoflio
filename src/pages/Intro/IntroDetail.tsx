@@ -1,67 +1,63 @@
-import { useEffect } from "react";
 import "./IntroDetail.scss";
-import AOS from "aos";
-import "aos/dist/aos.css";
+
+const COMPETENCIES = [
+  {
+    no: "01",
+    title: (
+      <>
+        디자인을 이해하는
+        <br />
+        프론트엔드 개발
+      </>
+    ),
+    text: "React·TypeScript·Next.js로 서비스를 구성하고 Firebase·공공 API 연동까지 직접 구현합니다. Photoshop·Illustrator·Figma 경험 덕에 시안을 픽셀 단위로 옮기면서 구현 가능성을 함께 판단합니다. 직접 구현할 수 있기에 AI 도구도 검증하며 활용해 반복 작업을 줄이고 구현 속도와 품질을 함께 끌어올립니다.",
+  },
+  {
+    no: "02",
+    title: (
+      <>
+        웹 표준·접근성
+        <br />
+        기반 UI 구현
+      </>
+    ),
+    text: "시각장애인용 교과서 리더기와 디지털 교과서를 개발하며 정보 구조를 실제 사용자 제약 속에서 설계했습니다. 시맨틱 마크업과 WCAG를 적용해 모두가 동등하게 접근하는 화면을 만듭니다.",
+  },
+  {
+    no: "03",
+    title: (
+      <>
+        직군을 넘나드는
+        <br />
+        협업
+      </>
+    ),
+    text: "디자이너·고객사·외주 인력과 협업하며 Slack·GitHub·SVN·Notion으로 일정과 산출물을 관리했습니다. 온보딩 가이드를 직접 만들고 반복 작업을 제거하는 프로세스를 제안해 팀의 야근을 절반으로 줄였습니다.",
+  },
+];
 
 const IntroDetail = () => {
-  useEffect(() => {
-    AOS.init({ duration: 800, easing: "ease-out" });
-  }, []);
-
   return (
-    <section className="intro-detail" data-aos="fade-up" data-aos-delay="200">
-      <h2 className="section-title">핵심 역량</h2>
-      <h3 className="section-subTitle">
-        더 많은 사용자가 불편 없이 <br className="mobileVisible" /> 이용할 수
-        있는 웹을 고민합니다.
-      </h3>
-
-      <div className="intro-detail__cards">
-        <div className="card">
-          <div className="card__image-wrapper">
-            <img
-              src="/assets/frontend.png"
-              alt="프론트엔드 이미지"
-              className="card__image"
-            />
+    <section className="core-section">
+      <div className="section-inner">
+        <div className="section-head">
+          <div>
+            <div className="section-kicker">01 / CORE</div>
+            <h2>핵심 역량</h2>
           </div>
-          <h3 className="card__title">디자인을 이해하는 프론트엔드 개발</h3>
-          <p className="card__text">
-            React·TypeScript·Next.js로 서비스를 구성하고, Firebase 인증·데이터 연동, 공공 API 연동까지 직접 구현합니다.
-            <br />
-            Photoshop·Illustrator·Figma를 다뤄온 디자인 경험 덕분에, 디자인 시안을 픽셀 단위로 충실히 옮기면서도 구현 가능성을 함께 판단합니다.
-          </p>
-        </div>
-        <div className="card">
-          <div className="card__image-wrapper">
-            <img
-              src="/assets/accessibility.png"
-              alt="접근성 이미지"
-              className="card__image"
-            />
-          </div>
-          <h3 className="card__title">웹 표준·접근성 기반 UI 구현</h3>
-          <p className="card__text">
-          시각장애인용 교과서 리더기와 디지털 교과서를 개발하며, 정보 구조와 시각 흐름을 실제 사용자 제약 속에서 설계했습니다. 시맨틱 마크업과 웹 접근성 지침(WCAG)을 적용해, 모든 사용자가 동등하게 접근하는 화면을 만듭니다.
+          <p className="section-desc">
+            더 많은 사용자가 불편 없이 이용할 수 있는 웹을 고민합니다.
           </p>
         </div>
 
-        <div className="card">
-          <div className="card__image-wrapper">
-            <img
-              src="/assets/collaboration.png"
-              alt="협업도구 이미지"
-              className="card__image"
-            />
-          </div>
-          <h3 className="card__title">직군을 넘나드는 협업</h3>
-          <p className="card__text">
-            디자이너·고객사·외주 인력과 협업하며
-            <br/>
-            Slack, GitHub, SVN, Notion으로 일정과 산출물을 관리했습니다.
-            <br />
-            외주 온보딩 가이드를 직접 만들고 반복 작업을 제거하는 프로세스를 제안해, 팀의 야근을 절반으로 줄였습니다.
-          </p>
+        <div className="core-cards">
+          {COMPETENCIES.map((c) => (
+            <div className="core-card" key={c.no}>
+              <div className="core-no">{c.no}</div>
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

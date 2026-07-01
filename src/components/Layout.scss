@@ -1,15 +1,6 @@
 @use '../style/globals';
 
-main{
+main {
   width: 100%;
-  max-width: 1024px;
   min-height: 100vh;
-  padding: 0 2.5rem;
-  margin: 0 auto;
-}
-
-@media (max-width: globals.$breakpoint-mobile) {
-  main {
-    padding: 0 1rem;
-  }
 }

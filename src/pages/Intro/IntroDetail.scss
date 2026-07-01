@@ -1,90 +1,73 @@
 @use '../../style/globals';
 
-.intro-detail {
-  padding: 3rem 1rem 4rem;
-  text-align: center;
-
-  .section-title{
-    font-size: 1.2rem;
-    color: globals.$color-primary;
-    font-family: globals.$font-pretendard;
-  }
-  .section-subTitle{
-    font-size: 1.5rem;
-    font-weight: 500;
-    font-family: globals.$font-pretendard;
+.core-section {
+  .section-inner {
+    @include globals.container;
   }
 
-  &__cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-    text-align: left;
+  .core-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid globals.$border;
+    border-radius: 16px;
+    overflow: hidden;
+    background: globals.$surface;
   }
 
-  .card {
-    background: #f9fafb;
-    border-radius: 1rem;
-    padding: 1.2rem;
-    width: 280px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  .core-card {
+    padding: 34px;
+    border-right: 1px solid globals.$border;
 
-    &__image-wrapper{
-      width: 100%;
-      margin-bottom: 0.7rem;
-      border-radius: 10px;
-      overflow: hidden;
+    &:last-child { border-right: none; }
+
+    .core-no {
+      font-family: globals.$font-mono;
+      font-size: 13px;
+      color: globals.$color-primary;
+      margin-bottom: 18px;
     }
 
-    &__title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+    h3 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 14px;
+      line-height: 1.35;
     }
 
-    &__text {
-      font-family: globals.$font-noto;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color:globals.$color-gray-700;
+    p {
+      font-size: 14.5px;
+      line-height: 1.72;
+      color: #5A606A;
+      margin: 0;
     }
   }
-  .mobileVisible{
-    display: none;
+
+  @media (max-width: 768px) {
+    .core-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .core-card {
+      border-right: none;
+      border-bottom: 1px solid globals.$border;
+
+      &:last-child { border-bottom: none; }
+    }
   }
 }
-@media (max-width: #{globals.$breakpoint-mobile}) {
-  .intro-detail .mobileVisible {
-    display: block !important;
-  }
-}
-// ---------------다크 모드---------------
-.dark .intro-detail {
 
-  .section-title{
-    color: globals.$color-primary-light;
-  }
-  .section-subTitle{
-    color: globals.$color-white;
-    font-family: globals.$font-pretendard;
+// ===== 다크 모드 =====
+.dark .core-section {
+  .core-cards {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
   }
 
-  .card {
-    background: globals.$color-gray-700;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+  .core-card {
+    border-right-color: globals.$d-border;
+    border-bottom-color: globals.$d-border;
 
-    &__image-wrapper{
-      filter: brightness(0.85) contrast(1.2) saturate(1.1);
-      opacity: 0.95;
-    }
-
-    &__title {
-      color: globals.$color-white;
-    }
-    &__text {
-      color:globals.$color-gray-300;
-    }
+    p { color: globals.$d-muted; }
   }
 }

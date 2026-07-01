@@ -1,140 +1,217 @@
 @use '../../style/globals';
 
-@font-face {
-    font-family: 'HakgyoansimDunggeunmisoTTF-B';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
 .main-header {
-  position: fixed;
-  top: 0.5rem;
-  left: 50%;
-  transform: translate(-50%, 0);
-  z-index: 1000;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247, 248, 250, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid globals.$border;
 
   .header-container {
+    @include globals.container;
+    height: 64px;
     display: flex;
-    flex-wrap: nowrap;
-    gap: 1.4rem;
+    align-items: center;
     justify-content: space-between;
-    background-color: globals.$color-gray-500;
-    padding: 0.5rem 2rem;
-    border-radius: 9999px;
-    backdrop-filter: blur(12px);
-    background-color: rgba(209, 213, 219, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    gap: 24px;
   }
 
   .logo {
     display: flex;
     align-items: center;
-    font-weight: bold;
+    gap: 10px;
     text-decoration: none;
-    color: globals.$color-primary;
-    font-family: 'HakgyoansimDunggeunmisoTTF-B';
-    white-space: nowrap;
-    margin-top: 5px;
-    font-size: 1.5rem;
-    line-height: 1.3rem;
+    color: globals.$ink;
+
+    .logo-name {
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-badge {
+      font-family: globals.$font-mono;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: globals.$muted-2;
+      border: 1px solid globals.$border;
+      border-radius: 5px;
+      padding: 3px 6px;
+    }
+  }
+
+  // 햄버거 버튼 (기본: 데스크탑에서 숨김)
+  .menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    span {
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: globals.$ink;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    &.open span:first-child { transform: translateY(3.5px) rotate(45deg); }
+    &.open span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
   }
 
   .nav-menu {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-shrink: 1;
-    
+    gap: 4px;
+
     a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      height: 25px;
-      line-height: 1;
-      color: globals.$color-gray-700;
-      font-size: 1rem;
-      padding: 2px 10px;
-      border-radius: 9999px;
-      transition: all 0.2s ease-in-out;
-      
+      font-size: 14px;
+      color: globals.$ink-2;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s, color 0.2s;
+
       &:hover {
-        color: globals.$color-gray-900;
+        background-color: rgba(20, 23, 28, 0.04);
+        color: globals.$ink;
       }
-      &.active{
-        background-color: globals.$color-white;
-        color: globals.$color-black;
+
+      &.active {
+        color: globals.$ink;
+        background-color: rgba(20, 23, 28, 0.05);
+      }
+    }
+
+    .resume-btn {
+      margin-left: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: globals.$color-primary;
+      border: 1px solid globals.$color-primary;
+      padding: 8px 14px;
+
+      &:hover {
+        background-color: globals.$color-primary;
+        color: #fff;
       }
     }
   }
 
-    &.hidden {
-    transform: translate(-50%, -100%);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  @media (max-width: globals.$breakpoint-tablet) {
+  // ===== 모바일: 햄버거 드롭다운 =====
+  @media (max-width: 640px) {
     .header-container {
-      padding: 0.4rem 1rem;
-      gap: 1rem;
+      height: 56px;
+    }
+
+    .menu-toggle {
+      display: flex;
     }
 
     .nav-menu {
-      gap: 0.5rem;
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 8px 20px 16px;
+      background: globals.$surface;
+      border-bottom: 1px solid globals.$border;
 
-      a {
-        padding: 2px 8px;
+      &.open {
+        display: flex;
       }
-    }
-  }
-
-  @media (max-width: globals.$breakpoint-mobile) {
-    .header-container {
-      padding: 0.3rem 1rem;
-      gap: 1rem;
-    }
-
-    .nav-menu {
-      gap: 0.5rem;
 
       a {
-        font-size: 0.85rem;
-        padding: 2px 5px;
+        font-size: 16px;
+        color: globals.$ink;
+        padding: 13px 0;
+        border-radius: 0;
+        border-bottom: 1px solid globals.$border-soft;
+
+        &:hover,
+        &.active {
+          background: none;
+          color: globals.$color-primary;
+        }
+      }
+
+      .resume-btn {
+        margin-left: 0;
+        margin-top: 8px;
+        text-align: center;
+        font-size: 14px;
+        color: #fff;
+        background: globals.$color-primary;
+        border: none;
+        padding: 13px;
+        border-radius: 10px;
       }
     }
   }
 }
-// ---------------다크 모드---------------
 
-
+// ===== 다크 모드 =====
 .dark .main-header {
-
-  .header-container {
-    // background-color: globals.$color-gray-500;
-    background-color: rgba(83, 83, 83, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
+  background: rgba(13, 14, 17, 0.82);
+  border-bottom-color: globals.$d-border;
 
   .logo {
-    color: globals.$color-primary-light;
-  }
+    color: globals.$d-ink;
 
-  .nav-menu {
-    
-    a {
-      color: globals.$color-gray-300;
-      
-      &:hover {
-        color: globals.$color-gray-900;
-      }
-      &.active{
-        background-color: globals.$color-white;
-        color: globals.$color-black;
-      }
+    .logo-badge {
+      color: globals.$d-muted-2;
+      border-color: globals.$d-border;
     }
   }
 
+  .menu-toggle span {
+    background: globals.$d-ink;
+  }
+
+  .nav-menu {
+    a {
+      color: globals.$d-ink-2;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.06);
+        color: globals.$d-ink;
+      }
+
+      &.active {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: globals.$d-ink;
+      }
+    }
+    // .resume-btn 은 accent 유지
+  }
+
+  @media (max-width: 640px) {
+    .nav-menu {
+      background: globals.$d-surface;
+      border-bottom-color: globals.$d-border;
+
+      a {
+        color: globals.$d-ink;
+        border-bottom-color: globals.$d-border-soft;
+
+        &:hover,
+        &.active {
+          background: none;
+          color: globals.$color-primary;
+        }
+      }
+    }
+  }
 }

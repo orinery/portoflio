@@ -1,0 +1,78 @@
+@use './style/globals';
+
+// ===== 리디자인 공통 컴포넌트 스타일 (앱 루트에서 1회 로드) =====
+
+// 섹션 상단 헤더 (좌: NN / LABEL + 제목, 우: 설명문)
+.section-head {
+  border-top: 1px solid globals.$border;
+  padding-top: 28px;
+  margin-bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+
+  .section-kicker {
+    font-family: globals.$font-mono;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: globals.$muted-3;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 16px 0 0;
+  }
+
+  .section-desc {
+    max-width: 400px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: globals.$muted;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    h2 { font-size: 28px; }
+  }
+}
+
+// 위쪽 여백을 둔 섹션 래퍼
+.section-block {
+  scroll-margin-top: 80px;
+  margin-top: 120px;
+
+  @media (max-width: 768px) {
+    margin-top: 80px;
+  }
+}
+
+// 모노스페이스 태그 칩
+.tag-chip {
+  font-family: globals.$font-mono;
+  font-size: 11px;
+  color: globals.$ink-2;
+  border: 1px solid globals.$border;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: globals.$surface;
+}
+
+// ===== 다크 모드 공통 오버라이드 =====
+.dark {
+  .section-head {
+    border-top-color: globals.$d-border;
+
+    .section-kicker { color: globals.$d-muted-3; }
+    .section-desc { color: globals.$d-muted; }
+  }
+
+  .tag-chip {
+    color: globals.$d-muted;
+    border-color: globals.$d-border;
+    background: globals.$d-surface;
+  }
+}

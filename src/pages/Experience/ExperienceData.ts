@@ -6,6 +6,7 @@ interface ExperienceItem {
   techStack: string[];
   tasks?: string[];
   taskGroups?: TaskGroup[];
+  metrics?: Metric[];
 }
 
 interface TaskGroup {
@@ -15,6 +16,12 @@ interface TaskGroup {
   achievements: string[];
 }
 
+interface Metric {
+  value: string;
+  arrow?: string;
+  label: string;
+}
+
 export const experienceData: ExperienceItem[] = [
   {
     period: '2024 ~ 2025',
@@ -22,6 +29,11 @@ export const experienceData: ExperienceItem[] = [
     title: '프론트엔드 개발자',
     description: '개정된 교과서에 맞추어 디지털 교과서 개발 및 유지 보수',
     techStack: ['HTML', 'CSS', 'JavaScript', 'SVN', 'FTP','Illustrator'],
+    metrics: [
+      { value: '50%', arrow: '↓', label: '프로세스 개선으로 야근 감소' },
+      { value: '20%', arrow: '↑', label: 'PL 지원으로 개발 속도 향상' },
+      { value: '+계약', label: '3·4학년 국어 추가 수주 성사' },
+    ],
     taskGroups: [
       {
         title: '3,4학년 1학기',

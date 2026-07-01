@@ -1,108 +1,240 @@
 @use '../../style/globals';
 
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
 .intro-section {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  padding: 7rem 2rem 3rem 2rem;
-  background-color: globals.$color-white;
-  
+  @include globals.container;
+
+  .top-anchor {
+    position: absolute;
+    top: 0;
+  }
+
+  .intro-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 56px;
+    align-items: center;
+    padding: 120px 0 108px;
+  }
+
+  .dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#DCDFE6 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
   .intro-content {
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
+    position: relative;
+
+    .kicker {
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: globals.$color-primary;
+      margin-bottom: 26px;
+    }
+
     h1 {
-      font-size: 3rem;
-      line-height: 1.4;
-      
-      span {
+      font-size: 60px;
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 28px;
+
+      .accent {
         color: globals.$color-primary;
       }
     }
 
     p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      color: globals.$color-gray-500;
+      font-size: 18px;
+      line-height: 1.75;
+      color: globals.$ink-2;
+      max-width: 540px;
+      margin: 0 0 38px;
+
+      strong {
+        color: globals.$ink;
+        font-weight: 600;
+      }
     }
-    .intro-buttons{
+
+    .intro-buttons {
       display: flex;
-      justify-content: center;
-      width: fit-content;
-      gap: 1rem;
-      margin: 0 auto;
-    }
-    button, .button {
-      display: block;
-      width: fit-content;
-      margin: 0 auto;
-      margin-top: 1rem;
-      min-height: 44px;
-      padding: 0.75rem 1.25rem;
-      border: none;
-      border-radius: 5px;
-      background-color:globals.$color-gray-300;
-      color: globals.$color-gray-700;
-      font-family: globals.$font-noto;
-      font-size: 0.875rem;
-      transition: background-color 0.3s, color 0.3s;
-      &:hover {
-        background-color:globals.$color-gray-500;
-        color: globals.$color-white;
+      gap: 12px;
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 14px 24px;
+        border-radius: 10px;
+        transition: transform 0.15s ease, background-color 0.2s;
+
+        &:hover { transform: translateY(-1px); }
+      }
+
+      .btn-primary {
+        color: #fff;
+        background: globals.$color-primary;
+
+        .arrow { font-family: globals.$font-mono; }
+        &:hover { background: globals.$color-primary-dark; }
+      }
+
+      .btn-secondary {
+        color: globals.$ink;
+        background: globals.$surface;
+        border: 1px solid globals.$border;
+
+        &:hover { background: #fff; border-color: globals.$muted-3; }
       }
     }
   }
-  .mobileVisible{
-    display: block;
+
+  .status-card {
+    position: relative;
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: 0 1px 2px rgba(20, 23, 28, 0.04);
+
+    .status-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: globals.$font-mono;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: globals.$muted-2;
+      padding-bottom: 18px;
+      border-bottom: 1px solid globals.$border-soft;
+
+      .dot {
+        flex: none;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #10B981;
+        animation: blink 1.8s ease-in-out infinite;
+      }
+    }
+
+    dl {
+      margin: 0;
+      font-family: globals.$font-mono;
+
+      > div {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 15px 0;
+        border-bottom: 1px solid globals.$border-soft;
+
+        &:last-child {
+          padding-bottom: 4px;
+          border-bottom: none;
+        }
+      }
+
+      dt {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: globals.$muted-3;
+      }
+
+      dd {
+        margin: 0;
+        font-size: 12.5px;
+        color: globals.$ink;
+        text-align: right;
+      }
+    }
   }
-}
-@media (max-width: globals.$breakpoint-tablet) {
-  .intro-section{
-    padding: 4rem 0rem 2rem 0rem !important;
+
+  @media (max-width: 900px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding: 72px 0 64px;
+    }
+
+    .intro-content h1 { font-size: 44px; }
+  }
+
+  @media (max-width: 600px) {
+    .intro-content .intro-buttons {
+      flex-direction: column;
+
+      a {
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
     .intro-content {
-      padding: 0rem;
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1rem;
-      }
+      h1 { font-size: 40px; }
+      p { font-size: 15px; }
     }
   }
-  .mobileVisible{
-    display: none;
-  }
 }
 
-@media (max-width: globals.$breakpoint-mobile) {
-  .intro-section .mobileVisible{
-    display: none;
-  }
-}
-
-// ---------------다크 모드---------------
+// ===== 다크 모드 =====
 .dark .intro-section {
-  background-color: globals.$color-darkmode;
+  .dot-grid {
+    background-image: radial-gradient(#20232A 1px, transparent 1px);
+  }
+
   .intro-content {
-    h1 {
-      color: globals.$color-white;
-      span {
-        color: globals.$color-primary-light;
-      }
-    }
-
     p {
-      color: globals.$color-gray-300;
+      color: globals.$d-ink-2;
+      strong { color: globals.$d-ink; }
     }
 
-    button, .button {
-      background-color:globals.$color-gray-600;
-      color: globals.$color-white;
+    .intro-buttons .btn-secondary {
+      color: globals.$d-ink;
+      background: globals.$d-surface;
+      border-color: globals.$d-border;
+
       &:hover {
-        background-color:globals.$color-gray-500;
-        color: globals.$color-gray-900;
+        background: globals.$d-surface-2;
+        border-color: globals.$d-muted-3;
       }
+    }
+  }
+
+  .status-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+    box-shadow: none;
+
+    .status-head {
+      color: globals.$d-muted-2;
+      border-bottom-color: globals.$d-border-soft;
+    }
+
+    dl {
+      > div { border-bottom-color: globals.$d-border-soft; }
+      dt { color: globals.$d-muted-3; }
+      dd { color: globals.$d-ink; }
     }
   }
 }

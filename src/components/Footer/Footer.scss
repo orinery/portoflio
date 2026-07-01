@@ -1,0 +1,38 @@
+@use '../../style/globals';
+
+.main-footer {
+  border-top: 1px solid globals.$border;
+  background: globals.$surface;
+
+  .footer-container {
+    @include globals.container;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer-name {
+    font-weight: 800;
+    font-size: 15px;
+    color: globals.$ink;
+  }
+
+  .footer-copy {
+    font-family: globals.$font-mono;
+    font-size: 11px;
+    color: globals.$muted-3;
+  }
+}
+
+// ===== 다크 모드 =====
+.dark .main-footer {
+  border-top-color: globals.$d-border;
+  background: globals.$d-surface;
+
+  .footer-name { color: globals.$d-ink; }
+  .footer-copy { color: globals.$d-muted-3; }
+}

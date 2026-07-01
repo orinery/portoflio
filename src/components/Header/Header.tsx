@@ -8,53 +8,18 @@ const NAV_ITEMS = [
   { id: "contact", label: "연락처" },
 ];
 
+const RESUME_URL =
+  "https://www.notion.so/Guchaehyun-1a607f340efa80d4b4d9f6f5229f72da?source=copy_link";
+
 const Header = () => {
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [activeId, setActiveId] = useState("skills");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // 아래로 스크롤하면 숨김, 위로 스크롤하면 나타남
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    const intro = document.getElementById("intro");
-    if (!intro) return;
-
-    const introObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveId("");
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    introObserver.observe(intro);
-    return () => introObserver.disconnect();
-  }, []);
+  const [activeId, setActiveId] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const sectionObserver = new IntersectionObserver(
       (entries) => {
-        // 현재 화면에 보이는 섹션들
         const visibleSections = entries
           .filter((entry) => entry.isIntersecting)
-          // 아래쪽에 있는 섹션 우선
           .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
 
         if (visibleSections.length > 0) {
@@ -63,7 +28,6 @@ const Header = () => {
             setActiveId(currentId);
           }
         } else {
-          // ✅ 아무 섹션도 안 보이면 active 초기화
           setActiveId("");
         }
       },
@@ -82,23 +46,50 @@ const Header = () => {
     return () => sectionObserver.disconnect();
   }, [activeId]);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <header className={`main-header ${hidden ? "hidden" : ""}`}>
+    <header className="main-header">
       <div className="header-container">
-        <a href="#top" className="logo">
-          ㄱㅊㅎ
+        <a href="#top" className="logo" onClick={closeMenu}>
+          <span className="logo-name">구채현</span>
+          <span className="logo-badge">PORTFOLIO</span>
         </a>
-        <nav className="nav-menu">
+
+        <button
+          type="button"
+          className={`menu-toggle ${menuOpen ? "open" : ""}`}
+          aria-label="메뉴 열기"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span />
+          <span />
+        </button>
+
+        <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
           {NAV_ITEMS.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               className={activeId === item.id ? "active" : ""}
-              onClick={() => setActiveId(item.id)} // 클릭 기반 active
+              onClick={() => {
+                setActiveId(item.id);
+                closeMenu();
+              }}
             >
               {item.label}
             </a>
           ))}
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="resume-btn"
+            onClick={closeMenu}
+          >
+            이력서
+          </a>
         </nav>
       </div>
     </header>
