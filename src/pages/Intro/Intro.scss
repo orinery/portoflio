@@ -1,9 +1,34 @@
+@use 'sass:map';
 @use '../../style/globals';
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
+
+// 강조 텍스트 하이라이트가 왼쪽에서 그어짐
+@keyframes accent-draw {
+  from { background-size: 0% 0.22em; }
+}
+
+// STATUS 값이 오른쪽에서부터 "로딩"되듯 드러남
+@keyframes value-wipe {
+  from { clip-path: inset(0 0 0 100%); }
+}
+
+// ===== Hero 로드 시퀀스 =====
+// kicker 0 → 1행 80 → 2행 180 → 본문 320 → 버튼 420 → STATUS 카드 500 → 행 640~850 → 점 깜빡임 1300
+$hero-seq: (
+  kicker: 0ms,
+  line-1: 80ms,
+  line-2: 180ms,
+  accent: 650ms,
+  body: 320ms,
+  buttons: 420ms,
+  card: 500ms,
+  rows: 640ms,
+  dot: 1300ms,
+);
 
 .intro-section {
   position: relative;
@@ -56,6 +81,8 @@
 
       .accent {
         color: globals.$color-primary;
+        background: linear-gradient(rgba(globals.$color-primary, 0.14), rgba(globals.$color-primary, 0.14))
+          no-repeat left bottom 0.1em / 100% 0.22em;
       }
     }
 
@@ -85,17 +112,33 @@
         text-decoration: none;
         padding: 14px 24px;
         border-radius: 10px;
-        transition: transform 0.15s ease, background-color 0.2s;
+        transition:
+          transform globals.$dur-fast globals.$ease-out,
+          background-color globals.$dur-instant,
+          border-color globals.$dur-instant;
 
-        &:hover { transform: translateY(-1px); }
+        &:hover,
+        &:focus-visible { transform: translateY(-1px); }
+
+        &:active { transform: scale(0.98); }
       }
 
       .btn-primary {
         color: #fff;
         background: globals.$color-primary;
 
-        .arrow { font-family: globals.$font-mono; }
-        &:hover { background: globals.$color-primary-dark; }
+        .arrow {
+          display: inline-block;
+          font-family: globals.$font-mono;
+          transition: transform globals.$dur-fast globals.$ease-out;
+        }
+
+        &:hover,
+        &:focus-visible {
+          background: globals.$color-primary-dark;
+
+          .arrow { transform: translateX(4px); }
+        }
       }
 
       .btn-secondary {
@@ -103,7 +146,8 @@
         background: globals.$surface;
         border: 1px solid globals.$border;
 
-        &:hover { background: #fff; border-color: globals.$muted-3; }
+        &:hover,
+        &:focus-visible { background: #fff; border-color: globals.$muted-3; }
       }
     }
   }
@@ -169,6 +213,52 @@
     }
   }
 
+  // ----- 로드 시퀀스 (모션 허용 시에만) -----
+  @include globals.motion-safe {
+    .kicker {
+      animation: reveal-up globals.$dur-reveal globals.$ease-out map.get($hero-seq, kicker) backwards;
+    }
+
+    h1 .line:nth-child(1) .line-inner {
+      animation: line-up 700ms globals.$ease-out map.get($hero-seq, line-1) backwards;
+    }
+
+    h1 .line:nth-child(2) .line-inner {
+      animation:
+        line-up 700ms globals.$ease-out map.get($hero-seq, line-2) backwards,
+        accent-draw globals.$dur-reveal globals.$ease-out map.get($hero-seq, accent) backwards;
+    }
+
+    .intro-content p {
+      animation: reveal-up globals.$dur-reveal globals.$ease-out map.get($hero-seq, body) backwards;
+    }
+
+    .intro-buttons {
+      animation: reveal-up globals.$dur-reveal globals.$ease-out map.get($hero-seq, buttons) backwards;
+    }
+
+    .status-card {
+      animation: reveal-up globals.$dur-reveal globals.$ease-out map.get($hero-seq, card) backwards;
+    }
+
+    // STATUS 행: 라벨이 먼저 나타나고 값이 오른쪽에서 채워짐
+    .status-card dl > div {
+      @for $n from 1 through 4 {
+        &:nth-child(#{$n}) {
+          $d: map.get($hero-seq, rows) + ($n - 1) * globals.$stagger;
+          animation: reveal-fade 300ms globals.$ease-out $d backwards;
+
+          dd { animation: value-wipe 400ms globals.$ease-out ($d + 80ms) backwards; }
+        }
+      }
+    }
+
+    // 로딩이 끝난 뒤에 상태 점이 깜빡이기 시작
+    .status-card .status-head .dot {
+      animation-delay: map.get($hero-seq, dot);
+    }
+  }
+
   @media (max-width: 900px) {
     .intro-grid {
       grid-template-columns: 1fr;
@@ -211,6 +301,10 @@
   }
 
   .intro-content {
+    h1 .accent {
+      background-image: linear-gradient(rgba(globals.$color-primary-light, 0.28), rgba(globals.$color-primary-light, 0.28));
+    }
+
     p {
       color: globals.$d-ink-2;
       strong { color: globals.$d-ink; }
@@ -221,7 +315,8 @@
       background: globals.$d-surface;
       border-color: globals.$d-border;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         background: globals.$d-surface-2;
         border-color: globals.$d-muted-3;
       }

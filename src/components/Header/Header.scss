@@ -1,5 +1,15 @@
 @use '../../style/globals';
 
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes header-shadow-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .main-header {
   position: sticky;
   top: 0;
@@ -7,6 +17,46 @@
   background: rgba(247, 248, 250, 0.82);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid globals.$border;
+
+  // 스크롤을 내리면 은은한 그림자가 생김 (그림자는 의사요소 opacity 로만 변화)
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 6px 20px rgba(20, 23, 28, 0.06);
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  // 상단 스크롤 진행 바 — CSS scroll-driven animation (미지원 브라우저에서는 숨김)
+  .scroll-progress {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: globals.$color-primary;
+    transform-origin: left;
+    pointer-events: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    &::after {
+      animation: header-shadow-in linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 64px;
+    }
+
+    @include globals.motion-safe {
+      .scroll-progress {
+        display: block;
+        animation: progress-grow linear both;
+        animation-timeline: scroll(root);
+      }
+    }
+  }
 
   .header-container {
     @include globals.container;
@@ -60,7 +110,7 @@
       height: 2px;
       border-radius: 2px;
       background: globals.$ink;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      transition: transform globals.$dur-fast globals.$ease-out;
     }
 
     &.open span:first-child { transform: translateY(3.5px) rotate(45deg); }
@@ -78,7 +128,9 @@
       text-decoration: none;
       padding: 8px 12px;
       border-radius: 8px;
-      transition: background-color 0.2s, color 0.2s;
+      transition:
+        background-color globals.$dur-fast globals.$ease-out,
+        color globals.$dur-fast globals.$ease-out;
 
       &:hover {
         background-color: rgba(20, 23, 28, 0.04);
@@ -116,8 +168,8 @@
       display: flex;
     }
 
+    // 닫힘: visibility hidden 으로 탭 순서에서 제외, 열림/닫힘은 opacity + translateY 로 전환
     .nav-menu {
-      display: none;
       position: absolute;
       top: 100%;
       left: 0;
@@ -128,9 +180,22 @@
       padding: 8px 20px 16px;
       background: globals.$surface;
       border-bottom: 1px solid globals.$border;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition:
+        opacity globals.$dur-fast globals.$ease-out,
+        transform globals.$dur-fast globals.$ease-out,
+        visibility 0s linear globals.$dur-fast;
 
       &.open {
-        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transform: none;
+        transition:
+          opacity globals.$dur-base globals.$ease-out,
+          transform globals.$dur-base globals.$ease-out,
+          visibility 0s;
       }
 
       a {
@@ -166,6 +231,8 @@
 .dark .main-header {
   background: rgba(13, 14, 17, 0.82);
   border-bottom-color: globals.$d-border;
+
+  &::after { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); }
 
   .logo {
     color: globals.$d-ink;

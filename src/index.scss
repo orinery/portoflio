@@ -50,6 +50,71 @@
   }
 }
 
+// ===== 공통 모션 =====
+// 키프레임은 to 를 생략해 요소의 기본 스타일로 끝나게 합니다.
+// (fill-mode: backwards 와 함께 쓰면 애니메이션 종료 후 hover transform 이 정상 동작)
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(globals.$reveal-distance);
+  }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+}
+
+@keyframes line-up {
+  from { transform: translateY(105%); }
+}
+
+// 스크롤 진입 reveal — data-reveal 요소를 useReveal 훅이 관찰해 data-revealed 를 붙입니다.
+// 지연은 --i(형제 순서) × stagger, 최대 $stagger-max 개까지만 누적.
+@include globals.motion-safe {
+  [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+  }
+
+  [data-revealed] {
+    animation: reveal-up globals.$dur-reveal globals.$ease-out backwards;
+    animation-delay: calc(min(var(--i, 0), #{globals.$stagger-max}) * #{globals.$stagger});
+  }
+}
+
+// 줄 단위 마스크 reveal 용 래퍼 (<span class="line"><span class="line-inner">…</span></span>)
+.line {
+  display: block;
+  overflow: hidden;
+  // 글리프가 잘리지 않도록 여유를 주고 같은 만큼 되돌림
+  padding: 0.06em 0;
+  margin: -0.06em 0;
+
+  .line-inner {
+    display: inline-block;
+  }
+}
+
+// 키보드 포커스 표시 (reset 에서 outline 을 제거했으므로 복구)
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid globals.$color-primary;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+// 화면에는 숨기고 스크린리더에는 읽히는 텍스트
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 // 모노스페이스 태그 칩
 .tag-chip {
   font-family: globals.$font-mono;

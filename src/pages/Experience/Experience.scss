@@ -66,8 +66,29 @@
         font-weight: 800;
         letter-spacing: -0.03em;
         color: globals.$color-primary;
+        // 카운트업 중 숫자 폭이 흔들리지 않도록 고정폭 숫자
+        font-variant-numeric: tabular-nums;
 
-        .arrow { font-size: 16px; }
+        .arrow {
+          display: inline-block;
+          font-size: 16px;
+        }
+      }
+
+      // 카운트업이 끝난 뒤 화살표가 방향대로 살짝 떠오름
+      @include globals.motion-safe {
+        .metric-value .arrow {
+          opacity: 0;
+          transform: translateY(4px);
+          transition:
+            opacity globals.$dur-base globals.$ease-out,
+            transform globals.$dur-base globals.$ease-out;
+        }
+
+        &.is-done .metric-value .arrow {
+          opacity: 1;
+          transform: none;
+        }
       }
 
       .metric-label {
@@ -118,15 +139,66 @@
         }
       }
 
+      .acc-name {
+        transition: color globals.$dur-instant;
+      }
+
+      &:hover .acc-name { color: globals.$color-primary; }
+
+      // + 아이콘: 세로 막대가 90° 돌며 가로 막대에 겹쳐 – 가 됨
       .acc-sign {
         flex: none;
-        font-family: globals.$font-mono;
-        font-size: 20px;
-        line-height: 1;
-        color: globals.$color-primary;
+        position: relative;
         width: 20px;
-        text-align: center;
+        height: 20px;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 12px;
+          height: 2px;
+          margin: -1px 0 0 -6px;
+          border-radius: 1px;
+          background: globals.$color-primary;
+          transition: transform globals.$dur-base globals.$ease-in-out;
+        }
+
+        &::after { transform: rotate(90deg); }
       }
+    }
+
+    .acc-item.open .acc-head .acc-sign::after {
+      transform: rotate(180deg);
+    }
+
+    // 높이 트랜지션: grid-template-rows 0fr ↔ 1fr
+    .acc-panel {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows globals.$dur-base globals.$ease-in-out;
+    }
+
+    .acc-item.open .acc-panel {
+      grid-template-rows: 1fr;
+    }
+
+    .acc-panel-inner {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    // 내용은 높이보다 살짝 늦게, 짧게 페이드
+    .acc-body {
+      opacity: 0;
+      transition: opacity globals.$dur-fast globals.$ease-out;
+    }
+
+    .acc-item.open .acc-body {
+      opacity: 1;
+      transition-delay: 80ms;
     }
 
     .acc-body {
@@ -211,6 +283,8 @@
       .acc-name { color: globals.$d-ink; }
       .acc-period { color: globals.$d-muted-3; }
     }
+
+    .acc-head:hover .acc-title .acc-name { color: globals.$color-primary-light; }
 
     .acc-body {
       .acc-role { color: globals.$d-muted-2; }

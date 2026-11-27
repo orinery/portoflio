@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import "./IntroDetail.scss";
 
 const COMPETENCIES = [
@@ -40,7 +41,7 @@ const IntroDetail = () => {
   return (
     <section className="core-section">
       <div className="section-inner">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <div>
             <div className="section-kicker">01 / CORE</div>
             <h2>핵심 역량</h2>
@@ -51,8 +52,13 @@ const IntroDetail = () => {
         </div>
 
         <div className="core-cards">
-          {COMPETENCIES.map((c) => (
-            <div className="core-card" key={c.no}>
+          {COMPETENCIES.map((c, i) => (
+            <div
+              className="core-card"
+              key={c.no}
+              data-reveal
+              style={{ "--i": i } as CSSProperties}
+            >
               <div className="core-no">{c.no}</div>
               <h3>{c.title}</h3>
               <p>{c.text}</p>

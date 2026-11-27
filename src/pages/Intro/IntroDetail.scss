@@ -15,16 +15,40 @@
   }
 
   .core-card {
+    position: relative;
     padding: 34px;
     border-right: 1px solid globals.$border;
+    transition: background-color globals.$dur-fast globals.$ease-out;
 
     &:last-child { border-right: none; }
+
+    // hover 시 상단 인디고 라인이 왼쪽에서 그어짐 (카드가 붙어 있는 패널형이라 lift 대신 사용)
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: globals.$color-primary;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform globals.$dur-base globals.$ease-out;
+    }
+
+    &:hover {
+      background-color: #FBFBFD;
+
+      &::before { transform: scaleX(1); }
+      .core-no { transform: translateX(4px); }
+    }
 
     .core-no {
       font-family: globals.$font-mono;
       font-size: 13px;
       color: globals.$color-primary;
       margin-bottom: 18px;
+      transition: transform globals.$dur-fast globals.$ease-out;
     }
 
     h3 {
@@ -67,6 +91,8 @@
   .core-card {
     border-right-color: globals.$d-border;
     border-bottom-color: globals.$d-border;
+
+    &:hover { background-color: globals.$d-surface-2; }
 
     p { color: globals.$d-muted; }
   }

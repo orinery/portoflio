@@ -16,6 +16,9 @@
     border: 1px solid globals.$border;
     border-radius: 14px;
     padding: 22px;
+    transition: border-color globals.$dur-fast globals.$ease-out;
+
+    &:hover { border-color: globals.$muted-3; }
 
     &__head {
       display: flex;
@@ -52,12 +55,30 @@
         width: 18px;
         height: 18px;
         object-fit: contain;
+        transition: transform globals.$dur-fast globals.$ease-out;
       }
 
       .label {
         font-size: 14px;
         color: #3C4149;
+        transition: color globals.$dur-instant;
       }
+
+      &:hover {
+        .icon { transform: scale(1.08); }
+        .label { color: globals.$ink; }
+      }
+    }
+  }
+
+  // 카드가 나타난 뒤 아이콘이 촘촘한 간격으로 이어서 등장 (8개 이후는 동시)
+  @include globals.motion-safe {
+    .skill-card[data-revealed] .skill-item {
+      animation: reveal-fade 400ms globals.$ease-out backwards;
+      animation-delay: calc(
+        min(var(--i, 0), #{globals.$stagger-max}) * #{globals.$stagger} + 150ms +
+        min(var(--j, 0), 8) * #{globals.$stagger-tight}
+      );
     }
   }
 
@@ -89,9 +110,12 @@
     background: globals.$d-surface;
     border-color: globals.$d-border;
 
+    &:hover { border-color: globals.$d-muted-3; }
+
     &__head .cat-count { color: globals.$d-skill-count; }
 
     .skill-item .label { color: globals.$d-skill-label; }
+    .skill-item:hover .label { color: globals.$d-ink; }
 
     // 어두운 배경에서 잘 안 보이는 단색 아이콘만 반전
     .icon[data-name="Next.js"],

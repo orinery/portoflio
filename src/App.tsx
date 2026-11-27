@@ -8,8 +8,11 @@ import Projects from "./pages/Projects/Projects";
 import Contact from "./pages/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import { useReveal } from "./hooks/useReveal";
 
 function App() {
+  useReveal();
+
   return (
     <>
       <DarkModeProvider />

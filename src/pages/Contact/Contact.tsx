@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import "./Contact.scss";
 
 const Contact = () => {
@@ -5,12 +6,15 @@ const Contact = () => {
     <section className="contact-section section-block" id="contact">
       <div className="section-inner">
         <div className="contact-grid">
-          <div className="contact-lead">
+          <div className="contact-lead" data-reveal>
             <div className="section-kicker">05 / CONTACT</div>
             <h2>
-              함께 만들
-              <br />
-              기회를 기다립니다.
+              <span className="line">
+                <span className="line-inner">함께 만들</span>
+              </span>
+              <span className="line">
+                <span className="line-inner">기회를 기다립니다.</span>
+              </span>
             </h2>
             <p>
               프로젝트, 채용, 협업 무엇이든 편하게 연락 주세요.
@@ -19,7 +23,11 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="contact-links">
+          <div
+            className="contact-links"
+            data-reveal
+            style={{ "--i": 1 } as CSSProperties}
+          >
             <a href="mailto:orinery0319@gmail.com">
               <span className="c-label">EMAIL</span>
               <span className="c-value">orinery0319@gmail.com</span>
@@ -35,7 +43,12 @@ const Contact = () => {
               className="last"
             >
               <span className="c-label">GITHUB</span>
-              <span className="c-value">github.com/orinery ↗</span>
+              <span className="c-value">
+                github.com/orinery{" "}
+                <span className="ext" aria-hidden="true">
+                  ↗
+                </span>
+              </span>
             </a>
           </div>
         </div>
