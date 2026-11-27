@@ -12,6 +12,11 @@
     @include globals.container;
   }
 
+  // 설명이 한 줄로 들어가도록 공통 max-width(400px) 해제 (좁은 화면에서는 자연스럽게 줄바꿈)
+  .section-head .section-desc {
+    max-width: none;
+  }
+
   // 공통 태그 칩 변형 (배경 없는 버전)
   .tag-chip.plain {
     background: transparent;
@@ -193,10 +198,41 @@
     transform: scale(1.02);
   }
 
-  // 정보 영역이 먼저, 브라우저 목업은 살짝 늦게 떠오름
+  // PC 브라우저 + 모바일 폰 프레임 겹침 (폰 아래쪽은 카드 밖으로 살짝 잘림)
+  .featured-preview.has-phone {
+    position: relative;
+    overflow: hidden; // 모바일에서 미리보기가 위로 올라가도 폰이 정보 영역을 침범하지 않도록
+    padding-right: 96px;
+
+    .featured-phone {
+      position: absolute;
+      right: 24px;
+      bottom: -48px;
+      width: 150px;
+      padding: 6px;
+      border-radius: 26px;
+      background: #111318;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.30);
+
+      img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 390 / 844;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  // 정보 영역이 먼저, 브라우저 목업은 살짝 늦게 떠오름 (폰은 조금 더 늦게)
   @include globals.motion-safe {
     .featured-card[data-revealed] .featured-preview .browser {
       animation: mockup-in 700ms globals.$ease-out 120ms backwards;
+    }
+
+    .featured-card[data-revealed] .featured-preview .featured-phone {
+      animation: mockup-in 700ms globals.$ease-out 280ms backwards;
     }
   }
 
@@ -258,6 +294,25 @@
       padding: 24px;
     }
 
+    // 한 줄 전체를 쓰는 카드 (실무 목업처럼 가로로 긴 이미지)
+    &.wide {
+      grid-column: 1 / -1;
+
+      .project-thumb {
+        height: auto;
+        aspect-ratio: 1600 / 700;
+
+        img {
+          object-fit: contain;
+          object-position: center;
+        }
+      }
+
+      .project-desc {
+        max-width: 760px;
+      }
+    }
+
     .project-head {
       display: flex;
       align-items: center;
@@ -294,9 +349,22 @@
       margin-bottom: 18px;
     }
 
+    .project-credit {
+      font-family: globals.$font-mono;
+      font-size: 11.5px;
+      color: globals.$muted-2;
+      margin: -6px 0 16px;
+    }
+
     .project-links {
       display: flex;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+
+      + .project-private {
+        display: block;
+        margin-top: 12px;
+      }
 
       a {
         font-size: 12.5px;
@@ -322,6 +390,21 @@
         }
       }
 
+      // 전체 화면 보기 (모달 열기 버튼, 링크와 같은 모양)
+      .link-archive {
+        padding: 0 0 1px;
+        background: none;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: globals.$color-primary;
+        border-bottom: 1px solid globals.$color-primary;
+        cursor: pointer;
+        transition: opacity globals.$dur-instant;
+
+        &:hover,
+        &:focus-visible { opacity: 0.75; }
+      }
+
       .link-github {
         color: globals.$muted-2;
         border-bottom: 1px solid #D6DAE1;
@@ -341,6 +424,58 @@
     }
   }
 
+  // 학습 기록 (카드 없이 한 줄씩)
+  .project-archive {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid globals.$border-soft;
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    flex-wrap: wrap;
+
+    .archive-label {
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: globals.$muted-3;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 28px;
+    }
+
+    li {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 14px;
+    }
+
+    a {
+      color: globals.$ink-2;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid #D6DAE1;
+
+      &:hover,
+      &:focus-visible {
+        color: globals.$color-primary;
+        border-bottom-color: globals.$color-primary;
+      }
+    }
+
+    .archive-summary {
+      color: globals.$muted-2;
+      font-size: 13px;
+    }
+  }
+
   @media (max-width: 860px) {
     .featured-card {
       grid-template-columns: 1fr;
@@ -350,6 +485,20 @@
     .featured-preview {
       order: -1;
       padding: 24px 24px 0;
+    }
+
+    .featured-preview.has-phone {
+      padding-right: 72px;
+
+      .featured-phone {
+        right: 16px;
+        bottom: -36px;
+        width: 108px;
+        padding: 5px;
+        border-radius: 20px;
+
+        img { border-radius: 15px; }
+      }
     }
 
     .featured-info {
@@ -436,6 +585,7 @@
 
     .project-head .project-meta { color: globals.$d-muted-3; }
     .project-desc { color: globals.$d-muted; }
+    .project-credit { color: globals.$d-muted-2; }
 
     .project-links {
       .link-demo {
@@ -449,8 +599,31 @@
         &:hover,
         &:focus-visible { color: globals.$d-ink; }
       }
+
+      .link-archive {
+        color: globals.$color-primary-light;
+        border-bottom-color: globals.$color-primary-light;
+      }
     }
 
     .project-private { color: globals.$d-private; }
+  }
+
+  .project-archive {
+    border-top-color: globals.$d-border-soft;
+
+    .archive-label { color: globals.$d-muted-3; }
+    .archive-summary { color: globals.$d-muted-2; }
+
+    a {
+      color: globals.$d-ink-2;
+      border-bottom-color: globals.$d-border;
+
+      &:hover,
+      &:focus-visible {
+        color: globals.$color-primary-light;
+        border-bottom-color: globals.$color-primary-light;
+      }
+    }
   }
 }

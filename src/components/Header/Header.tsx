@@ -5,11 +5,9 @@ const NAV_ITEMS = [
   { id: "skills", label: "기술" },
   { id: "experience", label: "경력" },
   { id: "projects", label: "프로젝트" },
+  { id: "feedback", label: "후기" },
   { id: "contact", label: "연락처" },
 ];
-
-const RESUME_URL =
-  "https://www.notion.so/Guchaehyun-1a607f340efa80d4b4d9f6f5229f72da?source=copy_link";
 
 const Header = () => {
   const [activeId, setActiveId] = useState("");
@@ -59,7 +57,7 @@ const Header = () => {
         <button
           type="button"
           className={`menu-toggle ${menuOpen ? "open" : ""}`}
-          aria-label="메뉴 열기"
+          aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
         >
@@ -81,15 +79,6 @@ const Header = () => {
               {item.label}
             </a>
           ))}
-          <a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="resume-btn"
-            onClick={closeMenu}
-          >
-            이력서
-          </a>
         </nav>
       </div>
       <div className="scroll-progress" aria-hidden="true" />

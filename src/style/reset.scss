@@ -27,6 +27,9 @@ body {
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  // 한글이 단어 중간에서 끊기지 않도록 (긴 영문·URL은 줄 끝에서 넘치지 않게 끊음)
+  word-break: keep-all;
+  overflow-wrap: anywhere;
   background-color: #F7F8FA;
   color: #15171C;
   overflow-x: clip;

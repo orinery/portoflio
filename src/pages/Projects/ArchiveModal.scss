@@ -1,0 +1,180 @@
+@use '../../style/globals';
+
+.archive-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: rgba(13, 14, 17, 0.6);
+
+  .archive-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 980px;
+    height: min(88vh, 960px);
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .archive-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 24px 16px;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: globals.$ink;
+    }
+
+    .archive-caption {
+      margin: 6px 0 0;
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      color: globals.$muted-3;
+    }
+  }
+
+  .archive-close {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: none;
+    font-size: 16px;
+    color: globals.$muted;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: globals.$bg;
+      color: globals.$ink;
+    }
+  }
+
+  .archive-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    padding: 0 24px 16px;
+    border-bottom: 1px solid globals.$border-soft;
+  }
+
+  .archive-group {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 10px;
+    background: globals.$bg;
+
+    button {
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: globals.$muted;
+      cursor: pointer;
+      transition: background-color globals.$dur-fast globals.$ease-out, color globals.$dur-fast globals.$ease-out;
+
+      &:hover { color: globals.$ink; }
+
+      &[aria-pressed="true"] {
+        background: globals.$surface;
+        color: globals.$ink;
+        box-shadow: 0 1px 3px rgba(20, 23, 28, 0.12);
+      }
+    }
+  }
+
+  .archive-scroll {
+    flex: 1;
+    overflow-y: auto;
+    background: #EEF1F5;
+    padding: 24px;
+
+    &:focus-visible {
+      outline: 2px solid globals.$color-primary;
+      outline-offset: -2px;
+    }
+  }
+
+  .archive-frame {
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(20, 23, 28, 0.14);
+
+    &.mo { max-width: 390px; }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 0;
+
+    .archive-content {
+      height: 100%;
+      border-radius: 0;
+      border: none;
+    }
+
+    .archive-scroll { padding: 12px; }
+  }
+}
+
+// ===== 다크 모드 =====
+.dark .archive-overlay {
+  background: rgba(0, 0, 0, 0.7);
+
+  .archive-content {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+  }
+
+  .archive-head h2 { color: globals.$d-ink; }
+  .archive-caption { color: globals.$d-muted-3; }
+
+  .archive-close {
+    color: globals.$d-muted;
+
+    &:hover,
+    &:focus-visible {
+      background: globals.$d-surface-2;
+      color: globals.$d-ink;
+    }
+  }
+
+  .archive-controls { border-bottom-color: globals.$d-border-soft; }
+
+  .archive-group {
+    background: globals.$d-bg;
+
+    button {
+      color: globals.$d-muted;
+
+      &:hover { color: globals.$d-ink; }
+
+      &[aria-pressed="true"] {
+        background: globals.$d-surface-2;
+        color: globals.$d-ink;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .archive-scroll { background: globals.$d-bg; }
+}

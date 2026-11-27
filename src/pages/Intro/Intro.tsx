@@ -14,17 +14,17 @@ const Intro = () => {
           </div>
           <h1>
             <span className="line">
-              <span className="line-inner">디자인하고,</span>
+              <span className="line-inner">디자인을 알고,</span>
             </span>
             <span className="line">
-              <span className="line-inner accent">개발합니다.</span>
+              <span className="line-inner accent">반복은 없앱니다.</span>
             </span>
           </h1>
           <p>
-            웹 디자이너로 시작해 지금은 React·Next.js로 화면을 구현합니다. AI
-            도구를 적극 활용해 빠르게 만들고, 코드를 이해하고 다듬는 데
-            집중합니다. 디자인 의도와 구현 제약을 모두 아는 개발자로서,{" "}<br/>
-            <strong>기획–디자인–개발 사이의 간극을 메웁니다.</strong>
+            여행 플랫폼에서 기획전을 퍼블리싱하고, 동료들이 업무에 쓰는 가격
+            계산기를 만들었습니다. 개인 서비스 ‘월급의 정석’은 AI와 함께
+            만들고,{" "}
+            <strong>계산 결과는 테스트로 직접 확인하며 다듬었습니다.</strong>
           </p>
           <div className="intro-buttons">
             <a href="#projects" className="btn-primary">
@@ -43,16 +43,20 @@ const Intro = () => {
           </div>
           <dl>
             <div>
-              <dt>ROLE</dt>
-              <dd>Frontend Developer</dd>
-            </div>
-            <div>
-              <dt>STACK</dt>
-              <dd>React · TypeScript · Next.js</dd>
+              <dt>NOW</dt>
+              <dd>Developer · Frontend & Design</dd>
             </div>
             <div>
               <dt>PATH</dt>
               <dd>Designer → Developer</dd>
+            </div>
+            <div>
+              <dt>WORK</dt>
+              <dd>HTML · SCSS · jQuery · PHP</dd>
+            </div>
+            <div>
+              <dt>SIDE</dt>
+              <dd>Next.js · React · TS</dd>
             </div>
             <div>
               <dt>BASED</dt>

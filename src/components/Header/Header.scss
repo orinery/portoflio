@@ -142,20 +142,6 @@
         background-color: rgba(20, 23, 28, 0.05);
       }
     }
-
-    .resume-btn {
-      margin-left: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: globals.$color-primary;
-      border: 1px solid globals.$color-primary;
-      padding: 8px 14px;
-
-      &:hover {
-        background-color: globals.$color-primary;
-        color: #fff;
-      }
-    }
   }
 
   // ===== 모바일: 햄버거 드롭다운 =====
@@ -211,18 +197,6 @@
           color: globals.$color-primary;
         }
       }
-
-      .resume-btn {
-        margin-left: 0;
-        margin-top: 8px;
-        text-align: center;
-        font-size: 14px;
-        color: #fff;
-        background: globals.$color-primary;
-        border: none;
-        padding: 13px;
-        border-radius: 10px;
-      }
     }
   }
 }
@@ -261,7 +235,6 @@
         color: globals.$d-ink;
       }
     }
-    // .resume-btn 은 accent 유지
   }
 
   @media (max-width: 640px) {

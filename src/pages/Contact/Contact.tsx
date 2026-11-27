@@ -7,7 +7,7 @@ const Contact = () => {
       <div className="section-inner">
         <div className="contact-grid">
           <div className="contact-lead" data-reveal>
-            <div className="section-kicker">05 / CONTACT</div>
+            <div className="section-kicker">06 / CONTACT</div>
             <h2>
               <span className="line">
                 <span className="line-inner">함께 만들</span>

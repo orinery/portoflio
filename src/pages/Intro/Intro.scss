@@ -243,7 +243,7 @@ $hero-seq: (
 
     // STATUS 행: 라벨이 먼저 나타나고 값이 오른쪽에서 채워짐
     .status-card dl > div {
-      @for $n from 1 through 4 {
+      @for $n from 1 through 5 {
         &:nth-child(#{$n}) {
           $d: map.get($hero-seq, rows) + ($n - 1) * globals.$stagger;
           animation: reveal-fade 300ms globals.$ease-out $d backwards;

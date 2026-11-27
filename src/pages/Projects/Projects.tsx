@@ -1,14 +1,18 @@
+import { useState } from "react";
 import type { CSSProperties } from "react";
 import "./Projects.scss";
-import { projectsData } from "./ProjectsData";
+import { learningLogs, projectsData } from "./ProjectsData";
+import type { Project } from "./ProjectsData";
+import ArchiveModal from "./ArchiveModal";
 
-const shortType = (type: string) => (type === "팀 프로젝트" ? "팀" : "개인");
+const shortType = (type: string) => type.replace(" 프로젝트", "");
 
 const hostFromUrl = (url: string) =>
   url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 const Projects = () => {
   const [featured, ...rest] = projectsData;
+  const [archiveOf, setArchiveOf] = useState<Project | null>(null);
 
   return (
     <section id="projects" className="projects-section section-block">
@@ -19,7 +23,7 @@ const Projects = () => {
             <h2>프로젝트</h2>
           </div>
           <p className="section-desc">
-            직접 기획·디자인·개발한 결과물. 코드와 데모를 함께 공개합니다.
+            개인 서비스와 실무 프로젝트. 공개 가능한 코드와 데모를 함께 둡니다.
           </p>
         </div>
 
@@ -68,20 +72,33 @@ const Projects = () => {
               )}
             </div>
           </div>
-          <div className="featured-preview">
+          <div
+            className={`featured-preview${featured.mobileImg ? " has-phone" : ""}`}
+          >
             <div className="browser">
               <div className="browser-bar">
                 <span className="dot red" />
                 <span className="dot yellow" />
                 <span className="dot green" />
-                {featured.demoUrl && (
+                {(featured.previewUrl || featured.demoUrl) && (
                   <span className="browser-url">
-                    {hostFromUrl(featured.demoUrl)}
+                    {featured.previewUrl ?? hostFromUrl(featured.demoUrl!)}
                   </span>
                 )}
               </div>
-              <img src={featured.img} alt={`${featured.name} 스크린샷`} />
+              <img
+                src={featured.img}
+                alt={featured.imgAlt ?? `${featured.name} 스크린샷`}
+              />
             </div>
+            {featured.mobileImg && (
+              <div className="featured-phone">
+                <img
+                  src={featured.mobileImg}
+                  alt={`${featured.name} 모바일 화면`}
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -89,13 +106,17 @@ const Projects = () => {
         <div className="project-grid">
           {rest.map((project, i) => (
             <div
-              className="project-card"
+              className={`project-card${project.wide ? " wide" : ""}`}
               key={project.name}
               data-reveal
               style={{ "--i": i % 2 } as CSSProperties}
             >
               <div className="project-thumb">
-                <img src={project.img} alt={`${project.name} 스크린샷`} />
+                <img
+                  src={project.img}
+                  alt={project.imgAlt ?? `${project.name} 스크린샷`}
+                  loading="lazy"
+                />
               </div>
               <div className="project-body">
                 <div className="project-head">
@@ -106,6 +127,9 @@ const Projects = () => {
                   </span>
                 </div>
                 <p className="project-desc">{project.description}</p>
+                {project.credit && (
+                  <p className="project-credit">{project.credit}</p>
+                )}
                 <div className="project-stack">
                   {project.techStack.map((t) => (
                     <span className="tag-chip plain sm" key={t}>
@@ -113,8 +137,35 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                {project.demoUrl || project.githubUrl ? (
+                {(project.demoUrl ||
+                  project.githubUrl ||
+                  project.archive ||
+                  (project.liveLinks && project.isLive !== false)) && (
                   <div className="project-links">
+                    {project.archive && (
+                      <button
+                        type="button"
+                        className="link-archive"
+                        onClick={() => setArchiveOf(project)}
+                      >
+                        전체 화면 보기
+                      </button>
+                    )}
+                    {project.isLive !== false &&
+                      project.liveLinks?.map((link) => (
+                      <a
+                        key={link.url}
+                        href={link.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="link-demo"
+                      >
+                        {link.label}{" "}
+                        <span className="ext" aria-hidden="true">
+                          ↗
+                        </span>
+                      </a>
+                    ))}
                     {project.demoUrl && (
                       <a
                         href={project.demoUrl}
@@ -139,14 +190,44 @@ const Projects = () => {
                       </a>
                     )}
                   </div>
-                ) : (
+                )}
+                {project.note && (
+                  <span className="project-private">{project.note}</span>
+                )}
+                {project.archive && project.archivedAt && (
                   <span className="project-private">
-                    교사 전용 서비스 · 데모 비공개
+                    {project.isLive === false
+                      ? `${project.archivedAt} 캡처 · 프로모션 종료`
+                      : `라이브 페이지 · ${project.archivedAt} 전체 화면 캡처 보관`}
                   </span>
                 )}
               </div>
             </div>
           ))}
+        </div>
+
+        {archiveOf?.archive && (
+          <ArchiveModal
+            title={archiveOf.name}
+            pages={archiveOf.archive}
+            archivedAt={archiveOf.archivedAt}
+            onClose={() => setArchiveOf(null)}
+          />
+        )}
+
+        {/* 학습 기록: 카드 없이 한 줄씩 */}
+        <div className="project-archive" data-reveal>
+          <span className="archive-label">학습 기록</span>
+          <ul>
+            {learningLogs.map((log) => (
+              <li key={log.name}>
+                <a href={log.githubUrl} target="_blank" rel="noreferrer">
+                  {log.name}
+                </a>
+                <span className="archive-summary">{log.summary}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

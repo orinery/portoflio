@@ -1,0 +1,95 @@
+@use '../../style/globals';
+
+.feedback-section {
+  .section-inner {
+    @include globals.container;
+  }
+
+  .feedback-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .feedback-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px;
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 16px;
+
+    blockquote {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: globals.$ink;
+      word-break: keep-all;
+    }
+  }
+
+  .feedback-by {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: globals.$font-mono;
+    font-size: 12px;
+
+    .by-name { color: globals.$ink-2; font-weight: 600; }
+    .by-role { color: globals.$muted-3; }
+  }
+
+  .feedback-more {
+    margin-top: 24px;
+    padding: 0 0 2px;
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: globals.$ink-2;
+    border-bottom: 1px solid globals.$color-primary;
+    cursor: pointer;
+    transition: color globals.$dur-fast globals.$ease-out;
+
+    &:hover,
+    &:focus-visible {
+      color: globals.$color-primary;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .feedback-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// ===== 다크 모드 =====
+.dark .feedback-section {
+  .feedback-card {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+
+    p { color: globals.$d-ink; }
+  }
+
+  .feedback-by {
+    .by-name { color: globals.$d-ink-2; }
+    .by-role { color: globals.$d-muted-3; }
+  }
+
+  .feedback-more {
+    color: globals.$d-ink-2;
+
+    &:hover,
+    &:focus-visible { color: globals.$color-primary-light; }
+  }
+}

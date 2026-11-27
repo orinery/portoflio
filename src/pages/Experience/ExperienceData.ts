@@ -24,14 +24,66 @@ interface Metric {
 
 export const experienceData: ExperienceItem[] = [
   {
+    period: '2026.02 ~ 현재',
+    company: '몽키트래블',
+    title: '개발자 (프론트엔드 · 디자인)',
+    description: '여행 예약 플랫폼의 기획전·이벤트 퍼블리싱, 사내 업무 도구 개발, 마케팅 디자인',
+    techStack: ['HTML', 'SCSS', 'JavaScript', 'jQuery', 'Swiper', 'PHP(Smarty)', 'Git', 'Photoshop', 'Illustrator'],
+    metrics: [
+      { value: '9건', label: '기획전·이벤트·랜딩 퍼블리싱' },
+      { value: '2~3일', label: '시안 수령부터 퍼블리싱 마감까지' },
+      { value: '6명+', label: '직접 만든 가격 계산기 사용 인원' },
+    ],
+    taskGroups: [
+      {
+        title: '기획전·이벤트·랜딩 퍼블리싱',
+        period: '2026 - 현재',
+        role: '디자이너 시안을 받아 반응형으로 퍼블리싱',
+        achievements: [
+          '칭다오(국문·영문), 겨울 치앙마이, 관광청 협업, 태국 골프, 12월 호텔 프로모션 기획전',
+          '쿠킹 클래스 8회·트래블제로 이벤트, 페이링크·Rate Market Group 랜딩 페이지',
+          '시안 수령 후 2~3일 안에 PC·모바일 반응형으로 마감',
+        ],
+      },
+      {
+        title: '사내 업무 도구 개발',
+        period: '2026',
+        role: '요구사항 청취부터 화면 설계·개발까지 단독',
+        achievements: [
+          '네이버 옵션가 계산기: 계산기로 하나하나 두드리고 역마진을 따로 확인하던 상품 등록 업무를 자동화, TnA팀 6명 이상 사용',
+          '오픈 5일 만에 사용자 피드백을 반영해 목표 마진율 기반 세일가 자동 계산 탭 추가',
+          'AI 이미지 스튜디오에 태국 현지 SNS용 소셜카드 생성 기능 추가: 로고·연락처 영역 보호, 프롬프트·가이드라인 설계, 신규 모델 추가',
+        ],
+      },
+      {
+        title: '서비스 화면 유지보수',
+        period: '2026 - 현재',
+        role: '실서비스 화면 수정 및 기능 보완',
+        achievements: [
+          '결제 팝업·제로카드 애니메이션, 예약 필수 추가정보 입력란 수정',
+          '월드 고객센터 국문·영문 페이지, 바우처 문구 수정, 배너 업로드 기능 개선',
+        ],
+      },
+      {
+        title: '디자인',
+        period: '2026 - 현재',
+        role: '인포그래픽·소셜카드·배너 디자인',
+        achievements: [
+          '일본·베트남 인포그래픽 제작 및 영문화',
+          '태국 현지 IG/FB 소셜카드, 메인 배너, 메일 발송용 HTML 제작',
+        ],
+      },
+    ],
+  },
+  {
     period: '2024 ~ 2025',
     company: '토브소프트',
     title: '프론트엔드 개발자',
     description: '개정된 교과서에 맞추어 디지털 교과서 개발 및 유지 보수',
     techStack: ['HTML', 'CSS', 'JavaScript', 'SVN', 'FTP','Illustrator'],
     metrics: [
-      { value: '50%', arrow: '↓', label: '프로세스 개선으로 야근 감소' },
-      { value: '20%', arrow: '↑', label: 'PL 지원으로 개발 속도 향상' },
+      { value: 'PL', label: '국어 과목 프로젝트 리더' },
+      { value: '정시', label: '새벽 퇴근이 일상이던 팀을 정시 퇴근으로' },
       { value: '+계약', label: '3·4학년 국어 추가 수주 성사' },
     ],
     taskGroups: [
@@ -51,7 +103,7 @@ export const experienceData: ExperienceItem[] = [
         role: '국어 과목의 프로젝트 리더(PL) 역할을 수행, 타 과목 개발에도 유기적으로 기여',
         achievements: [
           '외주 인력을 위한 실행 가능한 가이드 문서 제작 및 배포, 온보딩 효율성 확보',
-          '불필요한 반복 작업을 제거하는 프로세스 개선안 제안 및 실행 → 야근 50% 감소',
+          '반복 작업을 없애는 프로세스 개선안 제안·실행 → 새벽 1~3시 퇴근과 주말 출근이 일상이던 팀이 대부분 정시 퇴근',
           '기한 내 고품질 결과물 납품으로 3,4학년 국어 과목 개발 추가 계약 성사',
         ],
       },
@@ -60,7 +112,7 @@ export const experienceData: ExperienceItem[] = [
         period: '2024.01 - 2024.08',
         role: '국어, 수학, 통합 과목 개발 및 국어 PL 업무보조',
         achievements: [
-          '반복 발생하는 문제를 분석하여 PL을 지원, 개발 속도 20% 가속화',
+          '반복 발생하는 문제를 분석해 PL 업무를 지원하고 개발 일정 단축에 기여',
           '커뮤니케이션 프로세스 개선으로 전반적인 업무 효율 향상',
         ],
       },
@@ -77,7 +129,7 @@ export const experienceData: ExperienceItem[] = [
   },
   {
     period: '2022 ~ 2023',
-    company: '몽키 트래블',
+    company: '몽키트래블',
     title: '웹 디자이너',
     description: '인포그래픽 및 이벤트 페이지·배너 디자인',
     techStack: ['Photoshop','Illustrator', 'Procreate'],

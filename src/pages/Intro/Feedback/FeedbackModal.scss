@@ -1,112 +1,114 @@
 @use '../../../style/globals';
 
+// 모든 규칙을 .modal-overlay 아래로 한정 (전역 h2 등에 새지 않도록)
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-}
+  padding: 16px;
+  background: rgba(13, 14, 17, 0.6);
 
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  max-height: 80vh;
-  width: 90%;
-  max-width: 700px;
-  overflow-y: auto;
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  border: none;
-  background: none;
-  font-size: 1rem;
-  cursor: pointer;
-  color: globals.$color-gray-700;
-}
-
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: globals.$color-primary;
-  font-family: globals.$font-pretendard;
-}
-
-.feedback-list {
-  list-style: none;
-  padding: 0;
-}
-
-.feedback-item {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid globals.$color-gray-300;
-  word-break: keep-all;
-
-  &:last-child {
-    border-bottom: none;
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 36px 32px 24px;
+    background: globals.$surface;
+    border: 1px solid globals.$border;
+    border-radius: 16px;
   }
 
-  .feedback-content {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+  .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: none;
+    font-size: 16px;
+    color: globals.$muted;
+    cursor: pointer;
 
-  .feedback-meta {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    text-align: left;
-    color: globals.$color-gray-700;
-
-    .feedback-role {
-      font-weight: 500;
-      margin-left: 0.5rem;
-      color: globals.$color-gray-400;
+    &:hover,
+    &:focus-visible {
+      background: globals.$bg;
+      color: globals.$ink;
     }
   }
-}
-// ---------------다크 모드---------------
 
-.dark .modal-content {
-  background:globals.$color-gray-800;
-}
-
-.dark .close-button {
-  color: globals.$color-gray-300;
-}
-
-.dark h2 {
-
-  color: globals.$color-primary-light;
-} 
-
-
-.dark .feedback-item {
-  border-bottom: 1px solid globals.$color-gray-600;
-
-    &:last-child {
-    border-bottom: none;
+  h2 {
+    margin: 0 0 24px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: globals.$ink;
   }
+
+  .feedback-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .feedback-item {
+    padding: 20px 0;
+    border-top: 1px solid globals.$border-soft;
+    word-break: keep-all;
+
     .feedback-content {
-      color: globals.$color-gray-100;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.75;
+      color: globals.$ink-2;
     }
-  .feedback-meta {
-    color: globals.$color-gray-300;
 
-    .feedback-role {
-      font-weight: 500;
-      margin-left: 0.5rem;
-      color: globals.$color-gray-400;
+    .feedback-meta {
+      display: block;
+      margin-top: 10px;
+      font-family: globals.$font-mono;
+      font-size: 12px;
+      color: globals.$ink-2;
+
+      .feedback-role {
+        margin-left: 8px;
+        color: globals.$muted-3;
+      }
     }
   }
 }
 
+// ===== 다크 모드 =====
+.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+
+  .modal-content {
+    background: globals.$d-surface;
+    border-color: globals.$d-border;
+  }
+
+  .close-button {
+    color: globals.$d-muted;
+
+    &:hover,
+    &:focus-visible {
+      background: globals.$d-surface-2;
+      color: globals.$d-ink;
+    }
+  }
+
+  h2 { color: globals.$d-ink; }
+
+  .feedback-item {
+    border-top-color: globals.$d-border-soft;
+
+    .feedback-content { color: globals.$d-ink-2; }
+    .feedback-meta { color: globals.$d-ink-2; }
+    .feedback-role { color: globals.$d-muted-3; }
+  }
+}
