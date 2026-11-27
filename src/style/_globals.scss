@@ -78,3 +78,32 @@ $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 1024px;
 $breakpoint-desktop: 1280px;
+
+// ===== Motion tokens =====
+// 모든 모션은 아래 값만 사용합니다. (duration · easing · distance · stagger)
+$dur-instant: 120ms;  // 색상 변화, :active 눌림
+$dur-fast: 200ms;     // hover transform, 아이콘 회전
+$dur-base: 320ms;     // 아코디언, 모바일 메뉴, 상태 전환
+$dur-reveal: 600ms;   // 스크롤 진입
+
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);      // 등장 · hover
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);   // 열고 닫는 상태 전환
+
+$reveal-distance: 16px;
+$stagger: 70ms;          // 형제 요소 간격
+$stagger-tight: 30ms;    // 아이콘처럼 촘촘한 목록
+$stagger-max: 6;         // 이 개수 이후로는 지연을 누적하지 않음
+
+// 모션을 허용한 사용자에게만 적용
+@mixin motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+
+// hover 가 가능한 정밀 포인터(마우스)에서만 적용
+@mixin hover-device {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}

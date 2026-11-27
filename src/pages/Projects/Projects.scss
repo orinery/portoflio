@@ -1,5 +1,12 @@
 @use '../../style/globals';
 
+@keyframes mockup-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+}
+
 .projects-section {
   .section-inner {
     @include globals.container;
@@ -98,21 +105,38 @@
         text-decoration: none;
         padding: 10px 16px;
         border-radius: 9px;
-        transition: opacity 0.2s, background-color 0.2s;
+        transition:
+          opacity globals.$dur-instant,
+          background-color globals.$dur-instant,
+          border-color globals.$dur-instant,
+          transform globals.$dur-fast globals.$ease-out;
+
+        &:active { transform: scale(0.98); }
       }
 
       .btn-dark {
         color: #fff;
         background: globals.$ink;
-        .ext { font-family: globals.$font-mono; }
-        &:hover { opacity: 0.88; }
+
+        .ext {
+          display: inline-block;
+          font-family: globals.$font-mono;
+          transition: transform globals.$dur-fast globals.$ease-out;
+        }
+
+        &:hover,
+        &:focus-visible {
+          opacity: 0.88;
+          .ext { transform: translate(2px, -2px); }
+        }
       }
 
       .btn-outline {
         color: globals.$ink;
         background: globals.$surface;
         border: 1px solid globals.$border;
-        &:hover { border-color: globals.$muted-3; }
+        &:hover,
+        &:focus-visible { border-color: globals.$muted-3; }
       }
     }
   }
@@ -159,7 +183,20 @@
       img {
         display: block;
         width: 100%;
+        transform-origin: top center;
+        transition: transform globals.$dur-base globals.$ease-out;
       }
+    }
+  }
+
+  .featured-card:hover .featured-preview .browser img {
+    transform: scale(1.02);
+  }
+
+  // 정보 영역이 먼저, 브라우저 목업은 살짝 늦게 떠오름
+  @include globals.motion-safe {
+    .featured-card[data-revealed] .featured-preview .browser {
+      animation: mockup-in 700ms globals.$ease-out 120ms backwards;
     }
   }
 
@@ -171,16 +208,41 @@
   }
 
   .project-card {
+    position: relative;
     background: globals.$surface;
     border: 1px solid globals.$border;
     border-radius: 16px;
-    overflow: hidden;
+    transition:
+      transform globals.$dur-fast globals.$ease-out,
+      border-color globals.$dur-fast globals.$ease-out;
+
+    // 그림자는 의사요소의 opacity 로만 전환 (box-shadow 직접 트랜지션 대신)
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      box-shadow: 0 14px 32px rgba(20, 23, 28, 0.10);
+      opacity: 0;
+      transition: opacity globals.$dur-fast globals.$ease-out;
+      pointer-events: none;
+    }
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-4px);
+      border-color: #D6DAE1;
+
+      &::after { opacity: 1; }
+      .project-thumb img { transform: scale(1.03); }
+    }
 
     .project-thumb {
       border-bottom: 1px solid #EDEEF2;
       background: #F1F3F6;
       height: 200px;
       overflow: hidden;
+      border-radius: 15px 15px 0 0;
 
       img {
         display: block;
@@ -188,6 +250,7 @@
         height: 100%;
         object-fit: cover;
         object-position: top;
+        transition: transform globals.$dur-base globals.$ease-out;
       }
     }
 
@@ -240,16 +303,34 @@
         font-weight: 600;
         text-decoration: none;
         padding-bottom: 1px;
+        transition: color globals.$dur-instant, border-color globals.$dur-instant;
       }
 
       .link-demo {
         color: globals.$ink;
         border-bottom: 1px solid globals.$color-primary;
+
+        .ext {
+          display: inline-block;
+          transition: transform globals.$dur-fast globals.$ease-out;
+        }
+
+        &:hover,
+        &:focus-visible {
+          color: globals.$color-primary;
+          .ext { transform: translate(2px, -2px); }
+        }
       }
 
       .link-github {
         color: globals.$muted-2;
         border-bottom: 1px solid #D6DAE1;
+
+        &:hover,
+        &:focus-visible {
+          color: globals.$ink;
+          border-bottom-color: globals.$muted-3;
+        }
       }
     }
 
@@ -343,6 +424,11 @@
     background: globals.$d-surface;
     border-color: globals.$d-border;
 
+    &::after { box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45); }
+
+    &:hover,
+    &:focus-within { border-color: globals.$d-muted-3; }
+
     .project-thumb {
       background: globals.$d-surface-2;
       border-bottom-color: globals.$d-border-soft;
@@ -352,8 +438,17 @@
     .project-desc { color: globals.$d-muted; }
 
     .project-links {
-      .link-demo { color: globals.$d-ink; }
-      .link-github { color: globals.$d-muted-2; }
+      .link-demo {
+        color: globals.$d-ink;
+        &:hover,
+        &:focus-visible { color: globals.$color-primary-light; }
+      }
+
+      .link-github {
+        color: globals.$d-muted-2;
+        &:hover,
+        &:focus-visible { color: globals.$d-ink; }
+      }
     }
 
     .project-private { color: globals.$d-private; }

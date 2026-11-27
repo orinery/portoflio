@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import "./Skills.scss";
 import { skills } from "./SkillData";
 
@@ -12,7 +13,7 @@ export default function SkillSection() {
   return (
     <section id="skills" className="skill-section section-block">
       <div className="section-inner">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <div>
             <div className="section-kicker">02 / STACK</div>
             <h2>기술 스택 &amp; 도구</h2>
@@ -24,10 +25,15 @@ export default function SkillSection() {
         </div>
 
         <div className="skills-grid">
-          {CATEGORIES.map(({ key, label }) => {
+          {CATEGORIES.map(({ key, label }, i) => {
             const items = skills.filter((s) => s.category === key);
             return (
-              <div className="skill-card" key={key}>
+              <div
+                className="skill-card"
+                key={key}
+                data-reveal
+                style={{ "--i": i } as CSSProperties}
+              >
                 <div className="skill-card__head">
                   <span className="cat-label">{label}</span>
                   <span className="cat-count">
@@ -35,8 +41,12 @@ export default function SkillSection() {
                   </span>
                 </div>
                 <div className="skill-card__list">
-                  {items.map((skill) => (
-                    <div className="skill-item" key={skill.name}>
+                  {items.map((skill, j) => (
+                    <div
+                      className="skill-item"
+                      key={skill.name}
+                      style={{ "--j": j } as CSSProperties}
+                    >
                       <img
                         src={skill.icon}
                         alt=""

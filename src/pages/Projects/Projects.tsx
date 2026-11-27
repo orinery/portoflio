@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import "./Projects.scss";
 import { projectsData } from "./ProjectsData";
 
@@ -12,7 +13,7 @@ const Projects = () => {
   return (
     <section id="projects" className="projects-section section-block">
       <div className="section-inner">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <div>
             <div className="section-kicker">04 / WORK</div>
             <h2>프로젝트</h2>
@@ -23,7 +24,7 @@ const Projects = () => {
         </div>
 
         {/* Featured */}
-        <div className="featured-card">
+        <div className="featured-card" data-reveal>
           <div className="featured-info">
             <div className="featured-tags-top">
               <span className="badge-featured">FEATURED</span>
@@ -49,7 +50,10 @@ const Projects = () => {
                   rel="noreferrer"
                   className="btn-dark"
                 >
-                  Live Demo <span className="ext">↗</span>
+                  Live Demo{" "}
+                  <span className="ext" aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
               )}
               {featured.githubUrl && (
@@ -83,8 +87,13 @@ const Projects = () => {
 
         {/* Grid */}
         <div className="project-grid">
-          {rest.map((project) => (
-            <div className="project-card" key={project.name}>
+          {rest.map((project, i) => (
+            <div
+              className="project-card"
+              key={project.name}
+              data-reveal
+              style={{ "--i": i % 2 } as CSSProperties}
+            >
               <div className="project-thumb">
                 <img src={project.img} alt={`${project.name} 스크린샷`} />
               </div>
@@ -113,7 +122,10 @@ const Projects = () => {
                         rel="noreferrer"
                         className="link-demo"
                       >
-                        Demo ↗
+                        Demo{" "}
+                        <span className="ext" aria-hidden="true">
+                          ↗
+                        </span>
                       </a>
                     )}
                     {project.githubUrl && (

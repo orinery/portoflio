@@ -13,9 +13,12 @@ const Intro = () => {
             <span className="kicker-short">FRONTEND · DESIGN</span>
           </div>
           <h1>
-            디자인하고,
-            <br />
-            <span className="accent">개발합니다.</span>
+            <span className="line">
+              <span className="line-inner">디자인하고,</span>
+            </span>
+            <span className="line">
+              <span className="line-inner accent">개발합니다.</span>
+            </span>
           </h1>
           <p>
             웹 디자이너로 시작해 지금은 React·Next.js로 화면을 구현합니다. AI
@@ -25,7 +28,7 @@ const Intro = () => {
           </p>
           <div className="intro-buttons">
             <a href="#projects" className="btn-primary">
-              프로젝트 보기 <span className="arrow">→</span>
+              프로젝트 보기 <span className="arrow" aria-hidden="true">→</span>
             </a>
             <a href="#contact" className="btn-secondary">
               연락하기

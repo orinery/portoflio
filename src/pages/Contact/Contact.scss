@@ -43,6 +43,7 @@
     font-family: globals.$font-mono;
 
     a {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -51,22 +52,65 @@
       border-top: 1px solid globals.$border;
       text-decoration: none;
       color: globals.$ink;
-      transition: color 0.2s;
+      transition: color globals.$dur-instant;
 
       &.last { border-bottom: 1px solid globals.$border; }
 
-      &:hover { color: globals.$color-primary; }
+      // hover 시 기존 구분선 위로 인디고 라인이 왼쪽에서 그어짐 → 행 전체가 클릭 영역임을 표시
+      &::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: globals.$color-primary;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform globals.$dur-base globals.$ease-out;
+      }
 
       .c-label {
         font-size: 11px;
         letter-spacing: 0.08em;
         color: globals.$muted-3;
+        transition: transform globals.$dur-fast globals.$ease-out, color globals.$dur-instant;
       }
 
       .c-value {
         font-size: 15px;
         font-weight: 500;
+
+        .ext {
+          display: inline-block;
+          transition: transform globals.$dur-fast globals.$ease-out;
+        }
       }
+
+      &:hover,
+      &:focus-visible {
+        color: globals.$color-primary;
+
+        &::before { transform: scaleX(1); }
+
+        .c-label {
+          color: globals.$color-primary;
+          transform: translateX(4px);
+        }
+
+        .ext { transform: translate(2px, -2px); }
+      }
+    }
+  }
+
+  // 제목은 Hero 와 같은 줄 단위 마스크 reveal 로 마무리 (수미상관)
+  @include globals.motion-safe {
+    .contact-lead[data-revealed] {
+      animation-name: reveal-fade;
+
+      h2 .line-inner { animation: line-up 700ms globals.$ease-out backwards; }
+      h2 .line:nth-child(1) .line-inner { animation-delay: 80ms; }
+      h2 .line:nth-child(2) .line-inner { animation-delay: 180ms; }
     }
   }
 
@@ -96,8 +140,12 @@
 
     &.last { border-bottom-color: globals.$d-border; }
 
-    &:hover { color: globals.$color-primary; }
-
     .c-label { color: globals.$d-muted-3; }
+
+    &:hover,
+    &:focus-visible {
+      color: globals.$color-primary-light;
+      .c-label { color: globals.$color-primary-light; }
+    }
   }
 }

@@ -9,6 +9,19 @@ ol[role='list'] {list-style: none;}
 
 html { scroll-behavior: smooth; }
 
+// 모션 최소화를 요청한 사용자: 부드러운 스크롤과 모든 애니메이션·트랜지션을 즉시 완료 처리
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
 body {
   min-height: 100vh;
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;

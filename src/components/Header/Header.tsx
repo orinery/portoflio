@@ -92,6 +92,7 @@ const Header = () => {
           </a>
         </nav>
       </div>
+      <div className="scroll-progress" aria-hidden="true" />
     </header>
   );
 };
